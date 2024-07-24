@@ -1,6 +1,5 @@
 import Service from '../service/Service'
 
-console.log('ssss')
 const services: Service[] = [
   {
       "id": 1,

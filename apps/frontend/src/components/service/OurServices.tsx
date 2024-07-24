@@ -7,14 +7,11 @@ import useServices from "@/data/hooks/useServices"
 
 export default function OurServices() {
   const router = useRouter()
-  console.log("go")
   const { services } = useServices()
 
   function startSchedule() {
     router.push("/schedule")
   }
-
-  console.log("services", services)
 
   return (
     <div className="flex flex-col gap-16">

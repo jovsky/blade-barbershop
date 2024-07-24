@@ -7,7 +7,7 @@ import useLocalStorage from "../hooks/useLocalStorage"
 export interface UserContextProps {
   loading: boolean
   user: User | null
-  login: (user: User) => Promise<void>
+  signIn: (user: User) => Promise<void>
   logout: () => void
 }
 
@@ -28,7 +28,7 @@ export function UserProvider({ children }: React.PropsWithChildren) {
     }
   }, [get])
 
-  async function login(user: User) {
+  async function signIn(user: User) {
     setUser(user)
     set("user", user)
   }
@@ -46,7 +46,7 @@ export function UserProvider({ children }: React.PropsWithChildren) {
       value={{
         loading,
         user,
-        login,
+        signIn,
         logout,
       }}
     >
