@@ -8,8 +8,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "dev": "expo start --web",
+    "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "check": "npx tsc --noEmit"
   },
   "jest": {
     "preset": "jest-expo"
