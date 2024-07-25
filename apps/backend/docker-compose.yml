@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres-barbers_blade:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=barbers_blade
+      - POSTGRES_USER=barbers_blade
+      - POSTGRES_DB=barbers_blade
