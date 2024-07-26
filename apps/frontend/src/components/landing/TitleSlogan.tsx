@@ -33,14 +33,14 @@ export default function TitleSlogan() {
             🤘 Your style is our Rock 🤘
           </p>
           <Link
-            href="/schedule"
+            href="/scheduling"
             className="
                             bg-gradient-to-r from-green-500 to-green-600
                             text-white font-semibold text-base md:text-lg
                             py-2 px-4 rounded-md hover:from-green-600 hover:to-green-700
                         "
           >
-            Agendar Agora
+            Schedule Now
           </Link>
         </div>
       </div>

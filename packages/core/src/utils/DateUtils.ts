@@ -12,4 +12,19 @@ export default class DateUtils {
     newDate.setHours(parseInt(parts[0]!), parseInt(parts[1]!));
     return newDate;
   }
+
+  static toDateTimeLocaleString(date: Date, locales = "en-US") {
+    if (locales === "en-US") {
+      return date.toLocaleString(locales, {
+        dateStyle: "long",
+        timeStyle: "short",
+      });
+    }
+    if (locales === "pt-BR") {
+      return date
+        .toLocaleString(locales, { dateStyle: "long", timeStyle: "long" })
+        .slice(0, -4);
+    }
+    return "DateUtils";
+  }
 }

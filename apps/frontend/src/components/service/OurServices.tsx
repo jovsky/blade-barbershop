@@ -9,8 +9,8 @@ export default function OurServices() {
   const router = useRouter()
   const { services } = useServices()
 
-  function startSchedule() {
-    router.push("/schedule")
+  function startScheduling() {
+    router.push("/scheduling")
   }
 
   return (
@@ -25,7 +25,7 @@ export default function OurServices() {
           <ServiceItem
             key={service.id}
             service={service}
-            onClick={startSchedule}
+            onClick={startScheduling}
           />
         ))}
       </div>

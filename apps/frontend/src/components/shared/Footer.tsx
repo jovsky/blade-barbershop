@@ -26,7 +26,7 @@ export default function Footer() {
               Contact
             </span>
             <span className="text-sm text-zinc-400">
-              suport@barbersblade.com.br
+              support@thebarbersblade.com.br
             </span>
             <div className="flex items-center gap-2 text-sm text-zinc-400">
               <IconBrandWhatsapp size={20} className="text-green-500" />
