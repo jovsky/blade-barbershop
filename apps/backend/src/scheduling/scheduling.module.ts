@@ -1,9 +1,11 @@
 import { Module } from "@nestjs/common"
-import { SchedulingService } from "./scheduling.service"
 import { SchedulingController } from "./scheduling.controller"
+import { SchedulingRepository } from "./scheduling.service"
+import { DbModule } from "src/db/db.module"
 
 @Module({
-  providers: [SchedulingService],
+  imports: [DbModule],
   controllers: [SchedulingController],
+  providers: [SchedulingRepository],
 })
 export class SchedulingModule {}
