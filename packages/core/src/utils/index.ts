@@ -1,5 +1,5 @@
-import ScheduleUtils from './ScheduleUtils'
-import DateUtils from './DateUtils'
-import PhoneUtils from './PhoneUtils'
+import ScheduleUtils from "./ScheduleUtils";
+import DateUtils from "./DateUtils";
+import PhoneUtils from "./PhoneUtils";
 
-export { ScheduleUtils, DateUtils, PhoneUtils }
+export { ScheduleUtils, DateUtils, PhoneUtils };

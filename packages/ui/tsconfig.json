@@ -1,5 +1,8 @@
 {
-  "extends": ["@repo/typescript-config/react-library.json", "../typescript-config/base.json"],
+  "extends": [
+    "@repo/typescript-config/react-library.json",
+    "../typescript-config/base.json"
+  ],
   "compilerOptions": {
     "outDir": "dist"
   },

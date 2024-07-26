@@ -1,7 +1,7 @@
-import { professionals } from '@barba/core'
+import { professionals } from "@barba/core"
 
 export default function useProfissionais() {
-    return {
-        professionals,
-    }
+  return {
+    professionals,
+  }
 }
