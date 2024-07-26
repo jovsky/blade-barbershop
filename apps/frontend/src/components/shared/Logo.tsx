@@ -19,11 +19,14 @@ export default function Logo() {
         className="block sm:hidden"
       />
       <div className="flex flex-col justify-center h-full">
-        <span className="text-xl sm:text-2xl font-extralight leading-6 tracking-widest text-gradient">
+        <span className="text-[14px] sm:text-[18px] font-bold leading-6 pl-px text-gradient">
+          the
+        </span>
+        <span className="text-xl sm:text-2xl font-weight-300 leading-6 tracking-widest text-gradient">
           Barber&apos;s
         </span>
         <span className="text-[20px] sm:text-[24px] font-bold leading-6 pl-px text-gradient">
-          Choice
+          Blade
         </span>
       </div>
     </Link>
