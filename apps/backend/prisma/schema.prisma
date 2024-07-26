@@ -20,7 +20,7 @@ model Professional {
   imageURL             String
   rating               Float
   totalReviews         Int
-  scheduling         Scheduling[]
+  scheduling         Schedule[]
 
   @@map("professional")
 }
@@ -32,18 +32,18 @@ model Service {
   price        Float
   slots        Int
   imageURL     String
-  scheduling Scheduling[]
+  schedules    Schedule[]
 
   @@map("service")
 }
 
-model Scheduling {
+model Schedule {
   id             Int          @id @default(autoincrement())
-  customerEmail  String
+  costumerEmail  String
   date           DateTime     @db.Timestamptz(3)
   professional   Professional @relation(fields: [professionalId], references: [id])
   professionalId Int
   services       Service[]
 
-  @@map("scheduling")
+  @@map("schedule")
 }

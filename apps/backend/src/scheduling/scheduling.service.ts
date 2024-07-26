@@ -1,65 +1,61 @@
 import { Injectable } from "@nestjs/common"
-// import { RepositorioScheduling } from "@barba/core"
+import { ProfessionalDateSearchResult, Schedule, SchedulingRepository } from "@barba/core"
 import { PrismaService } from "src/db/prisma.service"
 
 @Injectable()
-// export class SchedulingRepository implements RepositorioScheduling {
-export class SchedulingRepository {
+export class SchedulingService implements SchedulingRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  // async criar(scheduling: Scheduling): Promise<void> {
-  //   await this.prismaService.scheduling.create({
-  //     data: {
-  //       data: scheduling.data,
-  //       emailCliente: scheduling.emailCliente,
-  //       profissional: { connect: { id: scheduling.profissional.id } },
-  //       servicos: {
-  //         connect: scheduling.servicos.map((servico) => ({ id: servico.id })),
-  //       },
-  //     },
-  //   })
-  // }
+  async create(scheduling: Schedule): Promise<void> {
+    await this.prismaService.schedule.create({
+      data: {
+        date: scheduling.date,
+        costumerEmail: scheduling.costumerEmail,
+        professional: { connect: { id: scheduling.professional.id } },
+        services: {
+          connect: scheduling.services.map((servico) => ({ id: servico.id })),
+        },
+      },
+    })
+  }
 
-  // async buscarPorEmail(email: string): Promise<Scheduling[]> {
-  //   return this.prismaService.scheduling.findMany({
-  //     where: {
-  //       emailCliente: email,
-  //       data: {
-  //         gte: new Date(),
-  //       },
-  //     },
-  //     include: {
-  //       servicos: true,
-  //       profissional: true,
-  //     },
-  //     orderBy: {
-  //       data: "desc",
-  //     },
-  //   })
-  // }
+  async searchByEmail(email: string): Promise<Schedule[]> {
+    return this.prismaService.schedule.findMany({
+      where: {
+        costumerEmail: email,
+        date: {
+          gte: new Date(),
+        },
+      },
+      include: {
+        services: true,
+        professional: true,
+      },
+      orderBy: {
+        date: "desc",
+      },
+    })
+  }
 
-  // async buscarPorProfissionalEData(
-  //   profissional: number,
-  //   data: Date,
-  // ): Promise<Scheduling[]> {
-  //   const ano = data.getFullYear()
-  //   const mes = data.getUTCMonth()
-  //   const dia = data.getUTCDate()
+  async searchByProfessionalAndDate(professionalId: number, date: Date): Promise<ProfessionalDateSearchResult[]> {
+    const year = date.getFullYear()
+    const month = date.getUTCMonth()
+    const day = date.getUTCDate()
 
-  //   const inicioDoDia = new Date(ano, mes, dia, 0, 0, 0)
-  //   const fimDoDia = new Date(ano, mes, dia, 23, 59, 59)
+    const startDay = new Date(year, month, day, 0, 0, 0)
+    const endDay = new Date(year, month, day, 23, 59, 59)
 
-  //   const resultado: any = await this.prismaService.scheduling.findMany({
-  //     where: {
-  //       profissionalId: profissional,
-  //       data: {
-  //         gte: inicioDoDia,
-  //         lte: fimDoDia,
-  //       },
-  //     },
-  //     include: { servicos: true },
-  //   })
+    const result = await this.prismaService.schedule.findMany({
+      where: {
+        professionalId,
+        date: {
+          gte: startDay,
+          lte: endDay,
+        },
+      },
+      include: { services: true },
+    })
 
-  //   return resultado
-  // }
+    return result
+  }
 }

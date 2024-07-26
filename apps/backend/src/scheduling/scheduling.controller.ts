@@ -1,27 +1,24 @@
-// import { Scheduling, ObterHorariosOcupados } from "@barba/core"
-import { SchedulingRepository } from "./scheduling.service"
-import { Controller } from "@nestjs/common"
+import { Schedule, GetBusyTimes } from "@barba/core"
+import { Body, Controller, Get, Param, Post } from "@nestjs/common"
+import { SchedulingService } from "./scheduling.service"
 
 @Controller("scheduling")
 export class SchedulingController {
-  constructor(private readonly repo: SchedulingRepository) {}
+  constructor(private readonly service: SchedulingService) {}
 
-  // @Post()
-  // criar(@Body() scheduling: Scheduling) {
-  //   return this.repo.criar(scheduling)
-  // }
+  @Post()
+  create(@Body() scheduling: Schedule) {
+    return this.service.create(scheduling)
+  }
 
-  // @Get(":email")
-  // buscarPorEmail(@Param("email") email: string) {
-  //   return this.repo.buscarPorEmail(email)
-  // }
+  @Get(":email")
+  searchByEmail(@Param("email") email: string) {
+    return this.service.searchByEmail(email)
+  }
 
-  // @Get("ocupacao/:profissional/:data")
-  // buscarOcupacaoPorProfissionalEData(
-  //   @Param("profissional") profissional: string,
-  //   @Param("data") dataParam: string,
-  // ) {
-  //   const casoDeUso = new ObterHorariosOcupados(this.repo)
-  //   return casoDeUso.executar(+profissional, new Date(dataParam))
-  // }
+  @Get("ocupacao/:profissional/:data")
+  searchByProfessionalAndDate(@Param("profissional") profissional: string, @Param("data") dataParam: string) {
+    const casoDeUso = new GetBusyTimes(this.service)
+    return casoDeUso.executar(+profissional, new Date(dataParam))
+  }
 }
