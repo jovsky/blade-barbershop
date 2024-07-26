@@ -16,9 +16,9 @@ export class SchedulingController {
     return this.service.searchByEmail(email)
   }
 
-  @Get("ocupacao/:profissional/:data")
-  searchByProfessionalAndDate(@Param("profissional") profissional: string, @Param("data") dataParam: string) {
-    const casoDeUso = new GetBusyTimes(this.service)
-    return casoDeUso.executar(+profissional, new Date(dataParam))
+  @Get("busy-schedules/:professional/:date")
+  searchByProfessionalAndDate(@Param("professional") professional: string, @Param("date") dateParam: string) {
+    const useCase = new GetBusyTimes(this.service)
+    return useCase.executar(+professional, new Date(dateParam))
   }
 }
