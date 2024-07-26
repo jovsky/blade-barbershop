@@ -1,5 +1,5 @@
 import { SLOT_TIME } from "../constants";
-import SchedulingRepository from "./SchedulingRepository";
+import SchedulingRepository from "./interfaces/SchedulingRepository";
 
 export default class GetBusyTimes {
   constructor(private readonly repo: SchedulingRepository) {}

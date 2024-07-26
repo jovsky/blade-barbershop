@@ -1,5 +1,5 @@
-import { Professional } from "../professional";
-import { Service } from "../service";
+import { Professional } from "../../professional";
+import { Service } from "../../service";
 
 export default interface Schedule {
   id: number;

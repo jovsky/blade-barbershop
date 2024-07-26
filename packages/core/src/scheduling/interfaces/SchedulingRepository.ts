@@ -1,4 +1,4 @@
-import { ProfessionalDateSearchResult } from "../../dist";
+import { ProfessionalDateSearchResult } from "../../../dist";
 import Schedule from "./Schedule";
 
 export default interface SchedulingRepository {
