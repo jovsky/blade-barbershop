@@ -1,5 +1,4 @@
 import axios from "axios"
-import { headers } from "next/headers"
 import { useCallback } from "react"
 
 const URL_BASE = process.env.NEXT_PUBLIC_URL_BASE
@@ -27,6 +26,7 @@ export default function useAPI() {
   ): Promise<any> {
     try {
       const { data } = await axios.post(`${URL_BASE}/${uri}`, body, config)
+      return data
     } catch (error) {
       console.error(error)
     }

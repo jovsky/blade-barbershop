@@ -1,4 +1,4 @@
-import { Service } from "@barba/core"
+import { CurrencyUtils, Service } from "@barba/core"
 import Image from "next/image"
 
 export interface ServiceItemProps {
@@ -28,8 +28,7 @@ export default function ServiceItem(props: ServiceItemProps) {
           {props.service.description}
         </span>
         <span className="text-lg font-bold">
-          R$ {props.service.price}
-          {/* {formatCurrency(props.service.price)} */}
+          {CurrencyUtils.formatCurrency(props.service.price)}
         </span>
       </div>
     </div>

@@ -97,7 +97,6 @@ export function SchedulingProvider({
         const busyTimes = await httpGet(
           `scheduling/busy-schedules/${professional!.id}/${dtString}`,
         )
-        console.log("busyTimes", professional.name, busyTimes)
         return busyTimes ?? []
       } catch (e) {
         return []

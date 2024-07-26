@@ -1,4 +1,4 @@
-import { DateUtils } from "@barba/core"
+import { DateUtils, LOCALE } from "@barba/core"
 
 export interface DayInputProps {
   dateTime: Date
@@ -23,7 +23,7 @@ export default function DayInput(props: DayInputProps) {
         <div className="flex items-center gap-1">
           <span className="text-2xl font-black">{date.getDate()}</span>
           <span className="text-xs font-light uppercase">
-            {date.toLocaleDateString("pt-BR", { month: "short" }).slice(0, 3)}
+            {date.toLocaleDateString(LOCALE, { month: "short" }).slice(0, 3)}
           </span>
         </div>
         <div
@@ -33,7 +33,7 @@ export default function DayInput(props: DayInputProps) {
                         py-0.5 px-3 rounded-full
                     `}
         >
-          {date.toLocaleDateString("pt-BR", { weekday: "short" }).slice(0, 3)}
+          {date.toLocaleDateString(LOCALE, { weekday: "short" }).slice(0, 3)}
         </div>
       </div>
     )

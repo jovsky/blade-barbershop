@@ -4,4 +4,6 @@ import services from "./services";
 
 const SLOT_TIME = 15;
 
-export { SLOT_TIME, costumers, professionals, services };
+const LOCALE: string = "en-US";
+
+export { SLOT_TIME, LOCALE, costumers, professionals, services };

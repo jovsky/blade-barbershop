@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { FC, useCallback, useState } from "react"
 import { cn } from "@/lib/utils"
 import { IconX } from "@tabler/icons-react"
 import { ScheduleUtils, DateUtils } from "@barba/core"
@@ -10,90 +10,112 @@ export interface HoursInputProps {
   onDateChange(date: Date): void
 }
 
-export default function HoursInput(props: HoursInputProps) {
-  const [slotHover, setHoveredSlot] = useState<string | null>(null)
+const TimeSlot: FC<HoursInputProps & { slotTime: string }> = ({
+  dateTime,
+  numberSlots,
+  onDateChange,
+  slotTime,
+}) => {
+  const [timeHovered, setHoveredSlot] = useState<string | null>(null)
   const { busyTimes } = useScheduling()
+
   const { morning, afternoon, night } = ScheduleUtils.dayHours()
 
-  const timeSelected = props.dateTime.toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  })
+  const timeSelected = DateUtils.getLocaleFormattedTime(dateTime)
 
-  function obtainPeriod(time: string | null, numberSlots: number) {
-    if (!time) return []
-    const times = morning.includes(time)
-      ? morning
-      : afternoon.includes(time)
-        ? afternoon
-        : night
-    const index = times.findIndex((h) => time == h)
-    return times.slice(index, index + numberSlots)
-  }
+  const getPeriod = useCallback(
+    (time: string | null, numberSlots: number) => {
+      if (!time) return []
+      const times = morning.includes(time)
+        ? morning
+        : afternoon.includes(time)
+          ? afternoon
+          : night
+      const index = times.findIndex((h) => time == h)
+      return times.slice(index, index + numberSlots)
+    },
+    [afternoon, morning, night],
+  )
 
-  function renderTime(time: string) {
-    const period = obtainPeriod(slotHover, props.numberSlots)
-    const hasAvailableTime = period.length === props.numberSlots
-    const highlightTime = hasAvailableTime && period.includes(time)
-    const selectedPeriod = obtainPeriod(timeSelected, props.numberSlots)
-    const selected =
-      selectedPeriod.length === props.numberSlots &&
-      selectedPeriod.includes(time)
-    const notSelectable = !hasAvailableTime && period.includes(time)
-    const blockedPeriod =
-      period.includes(time) && period.some((h) => busyTimes.includes(h))
-    const isBusy = busyTimes.includes(time)
+  const hoveredInterval = getPeriod(timeHovered, numberSlots)
 
-    return (
-      <div
-        key={time}
-        className={cn(
-          "flex justify-center items-center cursor-pointer h-8 border border-zinc-800 rounded select-none",
-          {
-            "bg-yellow-400": highlightTime,
-            "bg-red-500": notSelectable || blockedPeriod,
-            "text-white bg-green-500": selected,
-            "cursor-not-allowed bg-zinc-800": isBusy,
-          },
-        )}
-        onMouseEnter={(_) => setHoveredSlot(time)}
-        onMouseLeave={(_) => setHoveredSlot(null)}
-        onClick={() => {
-          if (notSelectable) return
-          if (isBusy || blockedPeriod) return
-          props.onDateChange(DateUtils.applyTime(props.dateTime, time))
-        }}
+  const hasAvailableTime = hoveredInterval.length === numberSlots
+
+  const highlightTime = hasAvailableTime && hoveredInterval.includes(slotTime)
+
+  const selectedPeriod = getPeriod(timeSelected, numberSlots)
+
+  const isSelected =
+    selectedPeriod.length === numberSlots && selectedPeriod.includes(slotTime)
+
+  const notSelectable = !hasAvailableTime && hoveredInterval.includes(slotTime)
+
+  const blockedPeriod =
+    hoveredInterval.includes(slotTime) &&
+    hoveredInterval.some((h) => busyTimes.includes(h))
+
+  const isBusy = busyTimes.includes(slotTime)
+
+  return (
+    <div
+      key={slotTime}
+      className={cn(
+        "flex justify-center items-center cursor-pointer h-8 border border-zinc-800 rounded select-none",
+        {
+          "text-white bg-green-500": isSelected,
+          "bg-red-500": notSelectable || blockedPeriod,
+          "bg-yellow-400": highlightTime,
+          "cursor-not-allowed bg-zinc-800": isBusy,
+        },
+      )}
+      onMouseEnter={(_) => setHoveredSlot(slotTime)}
+      onMouseLeave={(_) => setHoveredSlot(null)}
+      onClick={() => {
+        if (notSelectable) return
+        if (isBusy || blockedPeriod) return
+        onDateChange(DateUtils.applyTime(dateTime, slotTime))
+      }}
+    >
+      <span
+        className={cn("text-sm text-zinc-400", {
+          "text-white font-semibold": isSelected,
+          "text-black font-semibold": highlightTime,
+          "text-zinc-400 font-semibold": isBusy,
+        })}
       >
-        <span
-          className={cn("text-sm text-zinc-400", {
-            "text-black font-semibold": highlightTime,
-            "text-white font-semibold": selected,
-            "text-zinc-400 font-semibold": isBusy,
-          })}
-        >
-          {notSelectable || blockedPeriod || isBusy ? (
-            <IconX size={18} className="text-white" />
-          ) : (
-            time
-          )}
-        </span>
-      </div>
-    )
-  }
+        {notSelectable || blockedPeriod || isBusy ? (
+          <IconX size={18} className="text-white" />
+        ) : (
+          DateUtils.getLocaleFormattedTime(slotTime, true)
+        )}
+      </span>
+    </div>
+  )
+}
+
+export default function TimeInput(props: HoursInputProps) {
+  const { morning, afternoon, night } = ScheduleUtils.dayHours()
+
+  const mapComponent = (slotTime: string, i: number) => (
+    <TimeSlot key={i} {...props} slotTime={slotTime} />
+  )
+
   return (
     <div className="flex flex-col gap-5">
       <span className="text-sm uppercase text-zinc-400">Times Available</span>
       <div className="flex flex-col gap-3 select-none">
         <span className="text-xs uppercase text-zinc-400">Morning</span>
-        <div className="grid grid-cols-8 gap-1">{morning.map(renderTime)}</div>
+        <div className="grid grid-cols-8 gap-1">
+          {morning.map(mapComponent)}
+        </div>
 
         <span className="text-xs uppercase text-zinc-400">Afternoon</span>
         <div className="grid grid-cols-8 gap-1">
-          {afternoon.map(renderTime)}
+          {afternoon.map(mapComponent)}
         </div>
 
         <span className="text-xs uppercase text-zinc-400">Night</span>
-        <div className="grid grid-cols-8 gap-1">{night.map(renderTime)}</div>
+        <div className="grid grid-cols-8 gap-1">{night.map(mapComponent)}</div>
       </div>
     </div>
   )

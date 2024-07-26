@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Professional, Service } from "@barba/core"
 import useScheduling from "@/data/hooks/useScheduling"
 import Summary from "@/components/scheduling/Summary"
@@ -11,6 +11,8 @@ import Header from "@/components/shared/Header"
 
 export default function SchedulingPage() {
   const [nextStepAllowed, setNextStepAllowed] = useState<boolean>(false)
+  const [currentStep, setCurrentStep] = useState(0)
+
   const {
     professional,
     services,
@@ -21,38 +23,34 @@ export default function SchedulingPage() {
     numberSlots,
   } = useScheduling()
 
-  function onProfessionalChange(professional: Professional) {
-    selectProfessional(professional)
-    setNextStepAllowed(!!professional)
-  }
-
-  function onServicesChange(services: Service[]) {
-    selectServices(services)
-    setNextStepAllowed(services.length > 0)
-  }
-
-  function onDateChange(dateTime: Date) {
-    selectDateTime(dateTime)
-
+  useEffect(() => {
+    if (currentStep === 0) {
+      setNextStepAllowed(!!professional)
+      return
+    }
+    if (currentStep === 1) {
+      setNextStepAllowed(!!services.length)
+      return
+    }
     const hasDate = dateTime
     const validTime = dateTime.getHours() >= 8 && dateTime.getHours() <= 21
     setNextStepAllowed(hasDate && validTime)
-  }
+  }, [services, professional, dateTime, currentStep])
 
   return (
     <div className="flex flex-col bg-zinc-900">
       <Header
         title="Service Scheduling"
-        description="Be seen exactly at the scheduled time."
+        description="You will be attended punctually at the time"
       />
       <div
-        className="
-                    container flex flex-col lg:flex-row 
+        className=" container flex flex-col lg:flex-row 
                     items-center lg:items-start lg:justify-around 
-                    gap-10 lg:gap-0 py-10
-                "
+                    gap-10 lg:gap-0 py-10"
       >
         <Steps
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
           nextStepAllowed={nextStepAllowed}
           allowNextStep={setNextStepAllowed}
           labels={[
@@ -63,15 +61,15 @@ export default function SchedulingPage() {
         >
           <ProfessionalInput
             professional={professional}
-            onProfessionalChange={onProfessionalChange}
+            onProfessionalChange={selectProfessional}
           />
           <ServicesInput
             services={services}
-            onServicesChange={onServicesChange}
+            onServicesChange={selectServices}
           />
           <DateInput
             dateTime={dateTime}
-            onDateChange={onDateChange}
+            onDateChange={selectDateTime}
             numberSlots={numberSlots()}
           />
         </Steps>

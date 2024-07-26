@@ -3,7 +3,7 @@ import { Loader2 } from "lucide-react"
 import { FC, useState } from "react"
 import useScheduling from "@/data/hooks/useScheduling"
 import { useRouter } from "next/navigation"
-import { CurrencyUtils, DateUtils } from "@barba/core"
+import { CurrencyUtils, DateUtils, LOCALE } from "@barba/core"
 
 export default function Summary() {
   const [loading, setLoading] = useState(false)
@@ -93,7 +93,7 @@ export default function Summary() {
         <div className="flex flex-col gap-3">
           <span className="text-xs uppercase text-zinc-400">Date and Time</span>
           <span className="text-sm text-white">
-            {dateTime && DateUtils.toDateTimeLocaleString(dateTime, "en-US")}
+            {dateTime && DateUtils.toDateTimeLocaleString(dateTime)}
           </span>
         </div>
       </div>

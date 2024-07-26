@@ -1,3 +1,5 @@
+import { LOCALE } from "../constants";
+
 export default class DateUtils {
   static today() {
     const today = new Date();
@@ -9,22 +11,26 @@ export default class DateUtils {
   static applyTime(date: Date, time: string): Date {
     const newDate = new Date(date);
     const parts = time.split(":");
+
     newDate.setHours(parseInt(parts[0]!), parseInt(parts[1]!));
     return newDate;
   }
 
-  static toDateTimeLocaleString(date: Date, locales = "en-US") {
-    if (locales === "en-US") {
-      return date.toLocaleString(locales, {
-        dateStyle: "long",
-        timeStyle: "short",
-      });
-    }
-    if (locales === "pt-BR") {
-      return date
-        .toLocaleString(locales, { dateStyle: "long", timeStyle: "long" })
-        .slice(0, -4);
-    }
-    return "DateUtils";
+  static toDateTimeLocaleString(date: Date) {
+    return date.toLocaleString(LOCALE, {
+      dateStyle: "long",
+      timeStyle: "short",
+    });
+  }
+
+  static getLocaleFormattedTime(date: Date | string, hour12 = false) {
+    const newDate =
+      typeof date === "string" ? this.applyTime(new Date(), date) : date;
+
+    return newDate.toLocaleTimeString(LOCALE, {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12,
+    });
   }
 }

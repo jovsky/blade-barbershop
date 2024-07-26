@@ -13,6 +13,7 @@ export default function Header(props: HeaderProps) {
         src="/banners/main.webp"
         fill
         alt="Barbearia"
+        priority
         className="object-cover"
       />
       <div
@@ -25,7 +26,7 @@ export default function Header(props: HeaderProps) {
         <MenuSuperior />
         <div className="container flex-1 flex flex-col justify-center items-center">
           <h1 className="text-3xl font-black text-white/70">{props.title}</h1>
-          <p className="text-xs font-light text-white/60">
+          <p className="text-sm font-light text-white/60">
             {props.description}
           </p>
         </div>

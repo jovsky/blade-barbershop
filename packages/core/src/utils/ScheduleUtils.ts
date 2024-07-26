@@ -1,3 +1,5 @@
+import { DateUtils } from "../../dist";
+
 export default class ScheduleUtils {
   private static minutes = [0, 15, 30, 45];
 
@@ -9,12 +11,14 @@ export default class ScheduleUtils {
     };
   }
 
-  private static getTimes(times: number[]) {
-    return times.reduce((times, time) => {
-      const all = this.minutes.map((minute) => {
-        return `${String(time).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
-      });
-      return times.concat(all);
-    }, [] as string[]);
+  private static getTimes(hours: number[]) {
+    return hours
+      .map((hour) =>
+        this.minutes.map(
+          (minute) =>
+            `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`
+        )
+      )
+      .flat();
   }
 }
