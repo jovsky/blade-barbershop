@@ -6,9 +6,9 @@ export default class DateUtils {
   }
 
   // new Date(), '09:45'
-  static applyHour(date: Date, hour: string): Date {
+  static applyTime(date: Date, time: string): Date {
     const newDate = new Date(date);
-    const parts = hour.split(":");
+    const parts = time.split(":");
     newDate.setHours(parseInt(parts[0]!), parseInt(parts[1]!));
     return newDate;
   }

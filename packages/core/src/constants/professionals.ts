@@ -39,18 +39,18 @@ const professionals: Professional[] = [
   },
   {
     id: 5,
-    name: "Rafa Raspa Tudo",
+    name: "Rafa Shave Everything",
     description:
-      "Para aqueles que preferem um look mais rente, Rafa é o especialista! Sua máquina raspa tudo com precisão, deixando um acabamento perfeito. Raspar é a sua arte!",
+      "For those who prefer a closer look, Rafa is the expert! His machine shaves everything with precision, leaving a perfect finish. Shaving is his art!",
     imageURL: "/professionals/professional-5.jpg",
     rating: 4.5,
     totalReviews: 44,
   },
   {
     id: 6,
-    name: "Fernanda Faísca",
+    name: "Fernanda Spark",
     description:
-      "Fernanda traz um toque de brilho e energia a cada corte. Com suas lâminas ágeis, ela faz milagres em qualquer tipo de cabelo. Precisa de um look cheio de faísca? É com ela mesmo!",
+      "Fernanda brings a touch of shine and energy to every cut. With her agile blades, she works miracles on any hair type. Need a look that's full of sparkle? She's the one for you!",
     imageURL: "/professionals/professional-6.jpg",
     rating: 5,
     totalReviews: 46,

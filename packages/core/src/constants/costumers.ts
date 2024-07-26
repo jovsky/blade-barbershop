@@ -9,9 +9,9 @@ const costumers = [
   {
     id: 2,
     imagemURL: "/costumers/costumer-2.jpg",
-    name: 'Tiaguinho - "Attacker"',
+    name: 'Pelezinho - "Striker"',
     testimony:
-      'Football fanatic! He always arrives excited, ready to chat and discuss the latest game. Tiaguinho always says: "Cutting hair here is really cool, but I\'d rather score goals!"',
+      'Football fanatic! He always arrives excited, ready to chat and discuss the latest game. Pelezinho always says: "Cutting hair here is really cool, but I\'d rather score goals!"',
   },
   {
     id: 3,
