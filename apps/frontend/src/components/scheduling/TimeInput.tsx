@@ -10,13 +10,20 @@ export interface HoursInputProps {
   onDateChange(date: Date): void
 }
 
-const TimeSlot: FC<HoursInputProps & { slotTime: string }> = ({
+interface TimeSlotProps extends HoursInputProps {
+  slotTime: string
+  timeHovered: string | null
+  setHoveredSlot: (time: string | null) => void
+}
+
+const TimeSlot: FC<TimeSlotProps> = ({
   dateTime,
   numberSlots,
   onDateChange,
   slotTime,
+  timeHovered,
+  setHoveredSlot,
 }) => {
-  const [timeHovered, setHoveredSlot] = useState<string | null>(null)
   const { busyTimes } = useScheduling()
 
   const { morning, afternoon, night } = ScheduleUtils.dayHours()
@@ -95,9 +102,16 @@ const TimeSlot: FC<HoursInputProps & { slotTime: string }> = ({
 
 export default function TimeInput(props: HoursInputProps) {
   const { morning, afternoon, night } = ScheduleUtils.dayHours()
+  const [timeHovered, setHoveredSlot] = useState<string | null>(null)
 
   const mapComponent = (slotTime: string, i: number) => (
-    <TimeSlot key={i} {...props} slotTime={slotTime} />
+    <TimeSlot
+      key={i}
+      {...props}
+      slotTime={slotTime}
+      timeHovered={timeHovered}
+      setHoveredSlot={setHoveredSlot}
+    />
   )
 
   return (
