@@ -7,11 +7,14 @@ import Logo from '@/components/shared/Logo'
 import Image from 'next/image'
 
 export default function UserForm() {
+  const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn')
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
 
-  const { user, signIn } = useUser()
+  const { user, signIn, signUp } = useUser()
   const params = useSearchParams()
   const router = useRouter()
 
@@ -22,50 +25,104 @@ export default function UserForm() {
     }
   }, [user, router, params])
 
+  async function submit() {
+    if (mode === 'signIn') {
+      await signIn({ email, password })
+    } else {
+      await signUp({ name, email, password, phone })
+    }
+    cleanForm()
+  }
+
+  function cleanForm() {
+    setName('')
+    setEmail('')
+    setPhone('')
+    setPassword('')
+    setMode('signIn')
+  }
+
   return (
-    <div className="flex justify-center items-center h-screen relative">
-      <Image src="/banners/main.webp" fill alt="Barbearia" className="object-cover" />
+    <div className='flex justify-center items-center h-screen relative'>
+      <Image
+        src='/banners/main.webp'
+        fill
+        alt='Barbearia'
+        className='object-cover'
+      />
       <div
-        className="
-                    flex flex-col justify-center items-center gap-10
-                    absolute top-0 left-0 w-full h-full
-                    bg-black/80 md:bg-transparent md:bg-gradient-to-r from-black/30 via-black/90 to-black/30
-                "
+        className='
+              flex flex-col justify-center items-center gap-10
+              absolute top-0 left-0 w-full h-full
+              bg-black/80 md:bg-transparent md:bg-gradient-to-r from-black/30 via-black/90 to-black/30
+          '
       >
         <Logo />
-        <div className="flex flex-col w-1/5 gap-5">
-          <div className="flex flex-col gap-4 rounded">
+        <div className='flex flex-col w-1/5 gap-5'>
+          <div className='flex flex-col gap-4 rounded'>
+            {mode === 'signUp' && (
+              <input
+                type='text'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder='Name'
+                className='bg-zinc-900 px-4 py-2 rounded'
+              />
+            )}
             <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
-              className="bg-zinc-900 px-4 py-2 rounded"
-            />
-            <input
-              type="email"
+              type='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="E-mail"
-              className="bg-zinc-900 px-4 py-2 rounded"
+              placeholder='E-mail'
+              className='bg-zinc-900 px-4 py-2 rounded'
             />
             <input
-              type="tel"
-              value={PhoneUtils.format(phone)}
-              onChange={(s) => setPhone(PhoneUtils.unformat(s.target.value))}
-              placeholder="Phone"
-              className="bg-zinc-900 px-4 py-2 rounded"
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder='Password'
+              className='bg-zinc-900 px-4 py-2 rounded'
             />
-            <div className="flex gap-5">
+            {mode === 'signUp' && (
+              <input
+                type='tel'
+                value={PhoneUtils.format(phone)}
+                onChange={(s) =>
+                  setPhone(PhoneUtils.unformat(s.target.value))
+                }
+                placeholder='Phone'
+                className='bg-zinc-900 px-4 py-2 rounded'
+              />
+            )}
+            <div className='flex gap-5'>
+              <button onClick={submit} className='button bg-green-600 flex-1'>
+                {mode === 'signIn' ? 'Sign In' : 'Sign Up'}
+              </button>
               <button
-                onClick={() => signIn({ name, email, phone })} // TO-DO: tratar id
-                className="button bg-green-600 flex-1"
+                onClick={() => {
+                  router.push('/')
+                }}
+                className='button flex-1'
               >
-                Sign In
+                Cancel
               </button>
-              <button onClick={() => router.push('/')} className="button flex-1">
-                Cancelar
-              </button>
+            </div>
+            <div className='flex gap-5 justify-center text-sm'>
+              {mode === 'signIn' ? (
+                <button
+                  onClick={() => setMode('signUp')}
+                  className='text-zinc-300 hover:text-white'
+                >
+                  Still don't have an account? Sign up!
+                </button>
+              ) : (
+                <button
+                  onClick={() => setMode('signIn')}
+                  className='text-zinc-300 hover:text-white'
+                >
+                  Already have an account? Sign in!
+                </button>
+              )}
             </div>
           </div>
         </div>

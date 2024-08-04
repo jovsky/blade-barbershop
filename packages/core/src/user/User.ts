@@ -1,5 +1,8 @@
 export default interface User {
-  email: string;
-  name: string;
-  phone?: string;
+  id?: number 
+  email: string
+  name: string
+  password?: string
+  phone?: string
+  isBarber?: boolean
 }

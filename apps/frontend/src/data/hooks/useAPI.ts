@@ -1,34 +1,49 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios'
 import { useCallback } from 'react'
+import useUser from './useUser'
 
 const URL_BASE = process.env.NEXT_PUBLIC_API_URL
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json',
-    // 'Authorization': `Bearer ${jwt}`, <====
-  },
-}
 
 export default function useAPI() {
-  const httpGet = useCallback(async function (uri: string): Promise<any> {
+  const { token } = useUser()
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  }
+
+  const adjustURI = (uri: string) =>  uri.startsWith('/') ? uri : `/${uri}`
+
+  const httpGet = useCallback(async function <T>(uri: string): Promise<T | undefined> {
     try {
-      const { data } = await axios.get(`${URL_BASE}/${uri}`)
+      const { data } = await axios.get(`${URL_BASE}/${adjustURI(uri)}`, )
       return data
     } catch (error) {
       console.error(error)
     }
   }, [])
 
-  const httpPost = useCallback(async function (uri: string, body: any): Promise<any> {
+  const httpPost = useCallback(async function <T>(uri: string, body: any): Promise<T | undefined> {
     try {
-      const { data } = await axios.post(`${URL_BASE}/${uri}`, body, config)
+      const { data } = await axios.post(`${URL_BASE}/${adjustURI(uri)}`, body, config)
       return data
     } catch (error) {
       console.error(error)
     }
   }, [])
 
-  return { httpGet, httpPost }
+  /* For any late implementation */
+  const httpDelete = useCallback(async function <T>(uri: string): Promise<T | undefined> {
+    try {
+      const { data } = await axios.delete(`${URL_BASE}/${adjustURI(uri)}`, )
+      return data
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
+
+  return { httpGet, httpPost, httpDelete }
 }

@@ -16,7 +16,7 @@ export interface MenuUserProps {
 }
 
 export default function UserMenu(props: MenuUserProps) {
-  const { logout } = useUser()
+  const { signOut } = useUser()
 
   return props.user ? (
     <DropdownMenu>
@@ -34,7 +34,7 @@ export default function UserMenu(props: MenuUserProps) {
       <DropdownMenuContent>
         <DropdownMenuLabel>User Menu</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ) : null

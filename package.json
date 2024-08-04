@@ -8,6 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "prettier": "^3.2.5",
     "turbo": "^2.0.9",
     "typescript": "^5.4.5"
@@ -19,5 +20,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0"
+  }
 }

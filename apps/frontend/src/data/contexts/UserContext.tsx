@@ -2,44 +2,68 @@
 import { createContext, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { User } from '@barba/core'
-import useLocalStorage from '../hooks/useLocalStorage'
+import useAPI from '../hooks/useAPI'
+
+import { jwtDecode, JwtPayload } from 'jwt-decode'
+import cookie from 'js-cookie'
 
 export interface UserContextProps {
   loading: boolean
   user: User | null
-  signIn: (user: User) => Promise<void>
-  logout: () => void
+  signIn: (user: Partial<User>) => Promise<void>
+  signUp: (user: User) => Promise<void>
+  signOut: () => void
+  token: string | null
 }
 
 const UserContext = createContext<UserContextProps>({} as UserContextProps)
 
-export function UserProvider({ children }: React.PropsWithChildren) {
-  const { get, set } = useLocalStorage()
-  const router = useRouter()
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState<User | null>(null)
+const cookieName = 'barbers-blade-authorization'
 
-  const loadUser = useCallback(() => {
+export function UserProvider({ children }: React.PropsWithChildren) {
+  const { httpPost } = useAPI()
+  const router = useRouter()
+
+  const [loading, setLoading] = useState(true)
+  const [token, setToken] = useState<string | null>(null)
+  const [user, setUser] = useState<User | null>(null)
+  
+  const loadSession = useCallback(() => {
     try {
-      const localUser = get<User>('user')
-      localUser && setUser(localUser)
+      setLoading(true)
+      const { token, user } = getState() || {}
+      setToken(token ?? null)
+      setUser(user ?? null)
     } finally {
       setLoading(false)
     }
-  }, [get])
+  }, [])
 
-  async function signIn(user: User) {
-    setUser(user)
-    set('user', user)
+  useEffect(() => loadSession(), [loadSession])
+
+  async function signIn(user: Partial<User>) {
+    const token = await httpPost<string | undefined>('/user/sign-in', user)
+    
+    cookie.set(cookieName, token || '', {
+      expires: 1,
+      sameSite: 'None',
+      secure: true,
+    })
+
+    loadSession()
   }
 
-  function logout() {
-    router.push('/')
-    setUser(null)
-    set('user', null)
+  async function signUp(user: User) {
+    // TO:DO: handle success message and errors
+    await httpPost('/user/sign-up', user)
   }
 
-  useEffect(() => loadUser(), [loadUser])
+  function signOut() {
+      setToken(null)
+      setUser(null)
+      cookie.remove(cookieName)
+      router.push('/')
+  }
 
   return (
     <UserContext.Provider
@@ -47,12 +71,42 @@ export function UserProvider({ children }: React.PropsWithChildren) {
         loading,
         user,
         signIn,
-        logout,
+        signUp,
+        signOut,
+        token
       }}
     >
       {children}
     </UserContext.Provider>
   )
+}
+
+function getState(): { token: string; user: User } | null {
+  const jwt = cookie.get(cookieName)
+  if (!jwt) return null
+
+  try {
+      const decoded = jwtDecode<JwtPayload & User>(jwt)
+      const expired = decoded.exp ? decoded.exp < Date.now() / 1000 : null
+
+      if (expired) {
+          cookie.remove(cookieName)
+          return null
+      }
+      
+      return {
+          token: jwt,
+          user: {
+              id: decoded.id,
+              name: decoded.name,
+              email: decoded.email,
+              isBarber: decoded.isBarber,
+          },
+      }
+  } catch (error) {
+      cookie.remove(cookieName)
+      return null
+  }
 }
 
 export default UserContext

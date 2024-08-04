@@ -62,7 +62,7 @@ export function SchedulingProvider({ children }: { children: React.ReactNode }) 
     if (!user?.email) return
 
     const data: Omit<Schedule, 'id'> = {
-      costumerEmail: user.email,
+      user: user!,
       date: dateTime!,
       professional: professional!,
       services,
@@ -85,7 +85,7 @@ export function SchedulingProvider({ children }: { children: React.ReactNode }) 
         if (!dateTime || !professional) return []
 
         const dtString = dateTime.toISOString().slice(0, 10)
-        const busyTimes = await httpGet(`scheduling/busy-times/${professional!.id}/${dtString}`)
+        const busyTimes = await httpGet<string[]>(`scheduling/busy-times/${professional!.id}/${dtString}`)
         return busyTimes ?? []
       } catch (e) {
         return []
