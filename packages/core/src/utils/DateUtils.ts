@@ -33,4 +33,13 @@ export default class DateUtils {
       hour12,
     });
   }
+
+  static formatDate(date: Date): string {
+    return date.toLocaleDateString(LOCALE, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
 }

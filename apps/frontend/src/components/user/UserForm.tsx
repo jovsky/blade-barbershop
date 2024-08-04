@@ -63,7 +63,7 @@ export default function UserForm() {
             />
             <div className="flex gap-5">
               <button
-                onClick={() => signIn({ id: "-1", name, email, phone })} // TO-DO: tratar id
+                onClick={() => signIn({ name, email, phone })} // TO-DO: tratar id
                 className="button bg-green-600 flex-1"
               >
                 Sign In

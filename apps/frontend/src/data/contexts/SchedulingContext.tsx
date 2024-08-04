@@ -48,7 +48,7 @@ export function SchedulingProvider({
   }
 
   function totalPrice() {
-    return services.reduce((acc, atual) => acc + atual.price, 0)
+    return services.reduce((acc, current) => acc + current.price, 0)
   }
 
   const selectDateTime = useCallback(function (time: Date) {
@@ -95,7 +95,7 @@ export function SchedulingProvider({
         const dtString = dateTime.toISOString().slice(0, 10)
 
         const busyTimes = await httpGet(
-          `scheduling/busy-schedules/${professional!.id}/${dtString}`,
+          `scheduling/busy-times/${professional!.id}/${dtString}`,
         )
         return busyTimes ?? []
       } catch (e) {

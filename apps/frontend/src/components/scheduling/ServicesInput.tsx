@@ -1,4 +1,4 @@
-import useServices from "@/data/hooks/useServices"
+import { useServices } from "@barbers-blade/ui"
 import { Service } from "@barba/core"
 import Image from "next/image"
 

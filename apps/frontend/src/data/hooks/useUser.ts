@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import ContextoUser from "../contexts/UserContext"
+import UserContext from "../contexts/UserContext"
 
-const useUser = () => useContext(ContextoUser)
+const useUser = () => useContext(UserContext)
 export default useUser
