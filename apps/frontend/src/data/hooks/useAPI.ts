@@ -1,11 +1,11 @@
-import axios from "axios"
-import { useCallback } from "react"
+import axios from 'axios'
+import { useCallback } from 'react'
 
-const URL_BASE = process.env.NEXT_PUBLIC_URL_BASE
+const URL_BASE = process.env.NEXT_PUBLIC_API_URL
 
 const config = {
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     // 'Authorization': `Bearer ${jwt}`, <====
   },
 }
@@ -20,10 +20,7 @@ export default function useAPI() {
     }
   }, [])
 
-  const httpPost = useCallback(async function (
-    uri: string,
-    body: any,
-  ): Promise<any> {
+  const httpPost = useCallback(async function (uri: string, body: any): Promise<any> {
     try {
       const { data } = await axios.post(`${URL_BASE}/${uri}`, body, config)
       return data

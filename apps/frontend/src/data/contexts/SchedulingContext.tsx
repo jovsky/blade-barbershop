@@ -93,7 +93,6 @@ export function SchedulingProvider({
         if (!dateTime || !professional) return []
 
         const dtString = dateTime.toISOString().slice(0, 10)
-
         const busyTimes = await httpGet(
           `scheduling/busy-times/${professional!.id}/${dtString}`,
         )
