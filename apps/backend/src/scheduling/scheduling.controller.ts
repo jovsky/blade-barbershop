@@ -1,8 +1,8 @@
-import { Schedule, GetBusyTimes } from "@barba/core"
-import { Body, Controller, Get, Param, Post } from "@nestjs/common"
-import { SchedulingService } from "./scheduling.service"
+import { Schedule, GetBusyTimes } from '@barba/core'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { SchedulingService } from './scheduling.service'
 
-@Controller("scheduling")
+@Controller('scheduling')
 export class SchedulingController {
   constructor(private readonly service: SchedulingService) {}
 
@@ -11,13 +11,13 @@ export class SchedulingController {
     return this.service.create(scheduling)
   }
 
-  @Get(":email")
-  searchByEmail(@Param("email") email: string) {
+  @Get(':email')
+  searchByEmail(@Param('email') email: string) {
     return this.service.searchByEmail(email)
   }
 
-  @Get("busy-schedules/:professional/:date")
-  searchByProfessionalAndDate(@Param("professional") professional: string, @Param("date") dateParam: string) {
+  @Get('busy-times/:professional/:date')
+  searchByProfessionalAndDate(@Param('professional') professional: string, @Param('date') dateParam: string) {
     const useCase = new GetBusyTimes(this.service)
     return useCase.executar(+professional, new Date(dateParam))
   }

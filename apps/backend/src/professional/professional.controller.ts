@@ -1,7 +1,7 @@
-import { Controller, Get } from "@nestjs/common"
-import { PrismaService } from "src/db/prisma.service"
+import { Controller, Get } from '@nestjs/common'
+import { PrismaService } from 'src/db/prisma.service'
 
-@Controller("professionals")
+@Controller('professionals')
 export class ProfessionalController {
   constructor(private readonly prisma: PrismaService) {}
 

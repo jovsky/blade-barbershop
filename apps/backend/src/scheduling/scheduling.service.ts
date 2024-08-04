@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common"
-import { ProfessionalDateSearchResult, Schedule, SchedulingRepository } from "@barba/core"
-import { PrismaService } from "src/db/prisma.service"
+import { Injectable } from '@nestjs/common'
+import { ProfessionalDateSearchResult, Schedule, SchedulingRepository } from '@barba/core'
+import { PrismaService } from 'src/db/prisma.service'
 
 @Injectable()
 export class SchedulingService implements SchedulingRepository {
@@ -32,7 +32,7 @@ export class SchedulingService implements SchedulingRepository {
         professional: true,
       },
       orderBy: {
-        date: "desc",
+        date: 'desc',
       },
     })
   }
