@@ -1,35 +1,26 @@
-import { useProfessionals } from "@barbers-blade/ui"
-import { Professional } from "@barba/core"
-import Image from "next/image"
+import { useProfessionals } from '@barbers-blade/ui'
+import { Professional } from '@barba/core'
+import Image from 'next/image'
 
 export interface ProfessionalInputProps {
   professional: Professional | null
   onProfessionalChange: (professional: Professional) => void
 }
 
-const ProfessionalOption = (props: {
-  professional: Professional
-  onClick: (p: Professional) => void
-  isSelected?: boolean
-}) => {
+const ProfessionalOption = (props: { professional: Professional; onClick: (p: Professional) => void; isSelected?: boolean }) => {
   return (
     <div
       className={`
                 flex flex-col items-center cursor-pointer select-none rounded-lg border w-[150px] h-[180px]
-                ${props.isSelected ? "border-green-400" : "border-zinc-700"} overflow-hidden
+                ${props.isSelected ? 'border-green-400' : 'border-zinc-700'} overflow-hidden
             `}
       onClick={() => props.onClick(props.professional)}
     >
-      <Image
-        src={props.professional.imageURL}
-        alt={props.professional.name}
-        width={150}
-        height={150}
-      />
+      <Image src={props.professional.imageURL} alt={props.professional.name} width={150} height={150} />
       <div
         className={`
                     py-2 w-full h-full text-center text-xs
-                    ${props.isSelected ? "text-black bg-green-400 font-semibold" : "text-zinc-400 font-light bg-zinc-900 "}
+                    ${props.isSelected ? 'text-black bg-green-400 font-semibold' : 'text-zinc-400 font-light bg-zinc-900 '}
                 `}
       >
         {props.professional.name}

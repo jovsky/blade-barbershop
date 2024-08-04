@@ -1,5 +1,5 @@
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react"
-import React, { PropsWithChildren, useState } from "react"
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
+import React, { PropsWithChildren } from 'react'
 
 export interface StepsProps {
   labels: string[]
@@ -20,43 +20,27 @@ interface StepItemProps {
   currentStep: number
 }
 
-const StepItem: React.FC<StepItemProps> = ({
-  label,
-  stepIndex,
-  currentStep,
-}) => {
+const StepItem: React.FC<StepItemProps> = ({ label, stepIndex, currentStep }) => {
   return (
     <div className="flex items-center gap-2">
       <span
         className={`
                       flex justify-center items-center w-9 h-9 p-1 rounded-full font-bold
-                      ${stepIndex === currentStep ? "bg-white text-black" : "text-zinc-500 bg-zinc-700"} 
+                      ${stepIndex === currentStep ? 'bg-white text-black' : 'text-zinc-500 bg-zinc-700'} 
                   `}
       >
         {stepIndex + 1}
       </span>
-      <span
-        className={stepIndex === currentStep ? "text-white" : "text-zinc-700"}
-      >
-        {label}
-      </span>
+      <span className={stepIndex === currentStep ? 'text-white' : 'text-zinc-700'}>{label}</span>
     </div>
   )
 }
 
-const StepsProgress: React.FC<StepsProgressProps> = ({
-  labels,
-  currentStep,
-}) => {
+const StepsProgress: React.FC<StepsProgressProps> = ({ labels, currentStep }) => {
   return (
     <div className="flex flex-col md:flex-row gap-4 md:gap-7">
       {labels.map((label, i) => (
-        <StepItem
-          key={i}
-          label={label}
-          stepIndex={i}
-          currentStep={currentStep}
-        />
+        <StepItem key={i} label={label} stepIndex={i} currentStep={currentStep} />
       ))}
     </div>
   )

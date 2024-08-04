@@ -1,8 +1,7 @@
-import { createContext, useCallback, useEffect, useState } from "react"
-import { Professional, Schedule, Service } from "@barba/core"
-import { DateUtils } from "@barba/core"
-import useUser from "../hooks/useUser"
-import useAPI from "../hooks/useAPI"
+import { createContext, useCallback, useEffect, useState } from 'react'
+import { Professional, Schedule, Service, DateUtils } from '@barba/core'
+import useUser from '../hooks/useUser'
+import useAPI from '../hooks/useAPI'
 
 interface SchedulingContextProps {
   professional: Professional | null
@@ -20,11 +19,7 @@ interface SchedulingContextProps {
 
 export const SchedulingContext = createContext({} as SchedulingContextProps)
 
-export function SchedulingProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function SchedulingProvider({ children }: { children: React.ReactNode }) {
   const [professional, setProfessional] = useState<Professional | null>(null)
   const [services, setServices] = useState<Service[]>([])
   const [dateTime, setDateTime] = useState<Date>(DateUtils.today())
@@ -66,13 +61,13 @@ export function SchedulingProvider({
   async function schedule() {
     if (!user?.email) return
 
-    const data: Omit<Schedule, "id"> = {
+    const data: Omit<Schedule, 'id'> = {
       costumerEmail: user.email,
       date: dateTime!,
       professional: professional!,
       services,
     }
-    await httpPost("scheduling", data)
+    await httpPost('scheduling', data)
 
     limpar()
   }
@@ -85,17 +80,12 @@ export function SchedulingProvider({
   }
 
   const getBusyTimes = useCallback(
-    async function (
-      dateTime: Date,
-      professional: Professional,
-    ): Promise<string[]> {
+    async function (dateTime: Date, professional: Professional): Promise<string[]> {
       try {
         if (!dateTime || !professional) return []
 
         const dtString = dateTime.toISOString().slice(0, 10)
-        const busyTimes = await httpGet(
-          `scheduling/busy-times/${professional!.id}/${dtString}`,
-        )
+        const busyTimes = await httpGet(`scheduling/busy-times/${professional!.id}/${dtString}`)
         return busyTimes ?? []
       } catch (e) {
         return []

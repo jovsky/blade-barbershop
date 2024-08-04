@@ -1,6 +1,6 @@
-"use client"
-import UserForm from "@/components/user/UserForm"
-import { Suspense } from "react"
+'use client'
+import UserForm from '@/components/user/UserForm'
+import { Suspense } from 'react'
 
 export default function signIn() {
   return (

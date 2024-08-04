@@ -1,15 +1,15 @@
-"use client"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
-import { PhoneUtils } from "@barba/core"
-import useUser from "@/data/hooks/useUser"
-import Logo from "@/components/shared/Logo"
-import Image from "next/image"
+'use client'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { PhoneUtils } from '@barba/core'
+import useUser from '@/data/hooks/useUser'
+import Logo from '@/components/shared/Logo'
+import Image from 'next/image'
 
 export default function UserForm() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
 
   const { user, signIn } = useUser()
   const params = useSearchParams()
@@ -17,19 +17,14 @@ export default function UserForm() {
 
   useEffect(() => {
     if (user?.email) {
-      const dest = params.get("destiny") as string
-      router.push(dest ? dest : "/")
+      const dest = params.get('destiny') as string
+      router.push(dest || '/')
     }
   }, [user, router, params])
 
   return (
     <div className="flex justify-center items-center h-screen relative">
-      <Image
-        src="/banners/main.webp"
-        fill
-        alt="Barbearia"
-        className="object-cover"
-      />
+      <Image src="/banners/main.webp" fill alt="Barbearia" className="object-cover" />
       <div
         className="
                     flex flex-col justify-center items-center gap-10
@@ -68,10 +63,7 @@ export default function UserForm() {
               >
                 Sign In
               </button>
-              <button
-                onClick={() => router.push("/")}
-                className="button flex-1"
-              >
+              <button onClick={() => router.push('/')} className="button flex-1">
                 Cancelar
               </button>
             </div>

@@ -1,4 +1,4 @@
-import { DateUtils, LOCALE } from "@barba/core"
+import { DateUtils, LOCALE } from '@barba/core'
 
 export interface DayInputProps {
   dateTime: Date
@@ -17,23 +17,21 @@ export default function DayInput(props: DayInputProps) {
         onClick={() => props.onDateChange(date)}
         className={`
                     flex-1 flex flex-col items-center gap-2 py-4 cursor-pointer
-                    ${isSelected ? "bg-yellow-400 text-black" : "text-zinc-400"}
+                    ${isSelected ? 'bg-yellow-400 text-black' : 'text-zinc-400'}
                 `}
       >
         <div className="flex items-center gap-1">
           <span className="text-2xl font-black">{date.getDate()}</span>
-          <span className="text-xs font-light uppercase">
-            {date.toLocaleDateString(LOCALE, { month: "short" }).slice(0, 3)}
-          </span>
+          <span className="text-xs font-light uppercase">{date.toLocaleDateString(LOCALE, { month: 'short' }).slice(0, 3)}</span>
         </div>
         <div
           className={`
                         text-center text-xs font-light uppercase 
-                        ${isSelected ? "bg-black/10" : "bg-white/10"}
+                        ${isSelected ? 'bg-black/10' : 'bg-white/10'}
                         py-0.5 px-3 rounded-full
                     `}
         >
-          {date.toLocaleDateString(LOCALE, { weekday: "short" }).slice(0, 3)}
+          {date.toLocaleDateString(LOCALE, { weekday: 'short' }).slice(0, 3)}
         </div>
       </div>
     )

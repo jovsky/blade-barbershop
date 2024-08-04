@@ -1,5 +1,5 @@
-import DayInput from "./DayInput"
-import TimeInput from "./TimeInput"
+import DayInput from './DayInput'
+import TimeInput from './TimeInput'
 
 export interface DateInputProps {
   dateTime: Date
@@ -13,11 +13,7 @@ export default function DataInput(props: DateInputProps) {
   return (
     <div className="flex flex-col gap-10">
       <DayInput dateTime={dateTime} onDateChange={onDateChange} />
-      <TimeInput
-        dateTime={dateTime}
-        numberSlots={numberSlots}
-        onDateChange={onDateChange}
-      />
+      <TimeInput dateTime={dateTime} numberSlots={numberSlots} onDateChange={onDateChange} />
     </div>
   )
 }

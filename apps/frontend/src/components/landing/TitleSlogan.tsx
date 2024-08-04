@@ -1,17 +1,12 @@
-"use client"
-import Image from "next/image"
-import Link from "next/link"
-import MenuSuperior from "@/components/shared/TopMenu"
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import MenuSuperior from '@/components/shared/TopMenu'
 
 export default function TitleSlogan() {
   return (
     <div className="py-10 relative h-[700px]">
-      <Image
-        src="/banners/main.webp"
-        fill
-        alt="Barbershop"
-        className="object-cover"
-      />
+      <Image src="/banners/main.webp" fill alt="Barbershop" className="object-cover" />
       <div
         className="
                     flex flex-col items-center
@@ -29,9 +24,7 @@ export default function TitleSlogan() {
               Transformations
             </span>
           </h1>
-          <p className="w-96 text-center text-zinc-400 text-base sm:text-lg font-extralight">
-            🤘 Your style is our Rock 🤘
-          </p>
+          <p className="w-96 text-center text-zinc-400 text-base sm:text-lg font-extralight">🤘 Your style is our Rock 🤘</p>
           <Link
             href="/scheduling"
             className="

@@ -1,5 +1,6 @@
-"use client"
-import { useCallback } from "react"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
+import { useCallback } from 'react'
 
 export default function useLocalStorage() {
   const get = useCallback(<T>(key: string) => {

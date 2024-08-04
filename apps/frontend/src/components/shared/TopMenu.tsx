@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import Logo from "./Logo"
-import UserMenu from "./UserMenu"
-import useUser from "@/data/hooks/useUser"
+import Link from 'next/link'
+import Logo from './Logo'
+import UserMenu from './UserMenu'
+import useUser from '@/data/hooks/useUser'
 
 export default function TopMenu() {
   const { user } = useUser()
@@ -12,9 +12,7 @@ export default function TopMenu() {
     <header className="self-stretch flex justify-center items-center h-24 bg-black/60">
       <nav className="flex items-center justify-between container">
         <Logo />
-        <div>
-          {user ? <UserMenu user={user} /> : <Link href="/login">Sign In</Link>}
-        </div>
+        <div>{user ? <UserMenu user={user} /> : <Link href="/login">Sign In</Link>}</div>
       </nav>
     </header>
   )

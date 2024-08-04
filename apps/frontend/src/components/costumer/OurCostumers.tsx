@@ -1,9 +1,9 @@
-import { LayoutGrid } from "../ui/layout-grid"
-import CostumerItem from "./CostumerItem"
-import Title from "@/components/shared/Title"
-import useCostumers from "@/data/hooks/useCostumers"
+import { LayoutGrid } from '../ui/layout-grid'
+import CostumerItem from './CostumerItem'
+import Title from '@/components/shared/Title'
+import useCostumers from '@/data/hooks/useCostumers'
 
-const classes = ["md:col-span-2", "col-span-1", "col-span-1", "md:col-span-2"]
+const classes = ['md:col-span-2', 'col-span-1', 'col-span-1', 'md:col-span-2']
 
 export default function OurCostumers() {
   const { costumers } = useCostumers()
@@ -11,9 +11,7 @@ export default function OurCostumers() {
   const cards = costumers.map((cliente, i) => {
     return {
       id: cliente.id,
-      content: (
-        <CostumerItem name={cliente.name} testimony={cliente.testimony} />
-      ),
+      content: <CostumerItem name={cliente.name} testimony={cliente.testimony} />,
       className: classes[i],
       thumbnail: cliente.imagemURL,
     }

@@ -1,12 +1,7 @@
-import {
-  IconBrandYoutube,
-  IconBrandInstagram,
-  IconBrandX,
-  IconBrandLinkedin,
-} from "@tabler/icons-react"
-import { Professional } from "@barba/core"
-import Image from "next/image"
-import Reviews from "../shared/Reviews"
+import { IconBrandYoutube, IconBrandInstagram, IconBrandX, IconBrandLinkedin } from '@tabler/icons-react'
+import { Professional } from '@barba/core'
+import Image from 'next/image'
+import Reviews from '../shared/Reviews'
 
 export interface ProfessionalItemProps {
   professional: Professional
@@ -25,15 +20,10 @@ export default function ProfessionalItem(props: ProfessionalItemProps) {
       </div>
       <div className="flex flex-col p-4 gap-5">
         <span className="text-2xl font-black">{props.professional.name}</span>
-        <span className="text-sm text-zinc-400">
-          {props.professional.description}
-        </span>
+        <span className="text-sm text-zinc-400">{props.professional.description}</span>
 
         <div className="flex gap-3 flex-wrap">
-          <Reviews
-            rating={props.professional.rating}
-            totalReviews={props.professional.totalReviews}
-          />
+          <Reviews rating={props.professional.rating} totalReviews={props.professional.totalReviews} />
         </div>
 
         <div className="flex gap-3 text-zinc-300">

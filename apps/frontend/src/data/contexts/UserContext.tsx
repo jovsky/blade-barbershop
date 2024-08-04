@@ -1,8 +1,8 @@
-"use client"
-import { createContext, useCallback, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { User } from "@barba/core"
-import useLocalStorage from "../hooks/useLocalStorage"
+'use client'
+import { createContext, useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { User } from '@barba/core'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export interface UserContextProps {
   loading: boolean
@@ -21,7 +21,7 @@ export function UserProvider({ children }: React.PropsWithChildren) {
 
   const loadUser = useCallback(() => {
     try {
-      const localUser = get<User>("user")
+      const localUser = get<User>('user')
       localUser && setUser(localUser)
     } finally {
       setLoading(false)
@@ -30,13 +30,13 @@ export function UserProvider({ children }: React.PropsWithChildren) {
 
   async function signIn(user: User) {
     setUser(user)
-    set("user", user)
+    set('user', user)
   }
 
   function logout() {
-    router.push("/")
+    router.push('/')
     setUser(null)
-    set("user", null)
+    set('user', null)
   }
 
   useEffect(() => loadUser(), [loadUser])
