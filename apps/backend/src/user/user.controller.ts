@@ -11,17 +11,17 @@ export class UserController {
     private readonly cripto: BcryptProvider,
   ) {}
 
-  @Post('login')
-  async login(@Body() dados: { email: string; password: string }): Promise<string> {
+  @Post('sign-in')
+  async signIn(@Body() data: { email: string; password: string }): Promise<string> {
     const useCase = new UserSignIn(this.repo, this.cripto)
-    const user = await useCase.execute(dados.email, dados.password)
-    const segredo = process.env.JWT_SECRET!
-    return jwt.sign(user, segredo, { expiresIn: '15d' })
+    const user = await useCase.execute(data.email, data.password)
+    const secret = process.env.JWT_SECRET!
+    return jwt.sign(user, secret, { expiresIn: '15d' })
   }
 
-  @Post('registrar')
-  async registrar(@Body() user: User): Promise<void> {
-    const casoDeUso = new UserSignUp(this.repo, this.cripto)
-    await casoDeUso.execute(user)
+  @Post('sign-up')
+  async signUp(@Body() user: User): Promise<void> {
+    const useCase = new UserSignUp(this.repo, this.cripto)
+    await useCase.execute(user)
   }
 }
