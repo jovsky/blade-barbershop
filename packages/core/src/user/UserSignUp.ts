@@ -1,6 +1,6 @@
-import User from './User'
-import EncryptingProvider from './EncryptingProvider'
-import UserRepository from './UserRepository'
+import User from './interfaces/User'
+import EncryptingProvider from './interfaces/EncryptingProvider'
+import UserRepository from './interfaces/UserRepository'
 
 export default class UserSignUp {
     constructor(
@@ -8,9 +8,9 @@ export default class UserSignUp {
         private readonly cripto: EncryptingProvider
     ) {}
 
-    async executar(user: User): Promise<void> {
+    async execute(user: User): Promise<void> {
         const existingUser = await this.repo.searchByEmail(user.email)
-        if (existingUser) throw new Error('Usuário já existe')
+        if (existingUser) throw new Error('User already exists')
 
         const encryptedPassword = await this.cripto.encrypt(user.password)
         const novoUser: User = { ...user, password: encryptedPassword, isBarber: false }

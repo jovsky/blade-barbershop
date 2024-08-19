@@ -1,6 +1,6 @@
-import User from './User'
-import UserRepository from './UserRepository'
-import EncryptingProvider from './EncryptingProvider'
+import User from './interfaces/User'
+import UserRepository from './interfaces/UserRepository'
+import EncryptingProvider from './interfaces/EncryptingProvider'
 
 export default class UserSignIn {
     constructor(
@@ -8,7 +8,7 @@ export default class UserSignIn {
         private readonly cripto: EncryptingProvider
     ) {}
 
-    async executar(email: string, password: string): Promise<User | null> {
+    async execute(email: string, password: string): Promise<User> {
         const user = await this.repo.searchByEmail(email)
         if (!user) throw new Error('User not found')
 

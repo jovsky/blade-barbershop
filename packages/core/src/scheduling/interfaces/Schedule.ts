@@ -1,9 +1,10 @@
 import { Professional } from "../../professional";
 import { Service } from "../../service";
+import { User } from "../../user";
 
 export default interface Schedule {
   id: number;
-  costumerEmail: string;
+  user: User;
   date: Date;
   professional: Professional;
   services: Service[];

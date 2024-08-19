@@ -1,4 +1,3 @@
-import { ProfessionalDateSearchResult } from "../../../dist";
 import Schedule from "./Schedule";
 
 export default interface SchedulingRepository {
@@ -7,5 +6,6 @@ export default interface SchedulingRepository {
   searchByProfessionalAndDate(
     professional: number,
     date: Date
-  ): Promise<ProfessionalDateSearchResult[]>;
+  ): Promise<Schedule[]>;
+  delete(id: number): Promise<void>
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { ProfessionalDateSearchResult, Schedule, SchedulingRepository } from '@barba/core'
+import { Schedule, SchedulingRepository } from '@barba/core'
 import { PrismaService } from 'src/db/prisma.service'
 
 @Injectable()
@@ -10,7 +10,7 @@ export class SchedulingService implements SchedulingRepository {
     await this.prismaService.schedule.create({
       data: {
         date: scheduling.date,
-        costumerEmail: scheduling.costumerEmail,
+        user: { connect: { id: scheduling.professional.id } },
         professional: { connect: { id: scheduling.professional.id } },
         services: {
           connect: scheduling.services.map((servico) => ({ id: servico.id })),
@@ -22,7 +22,9 @@ export class SchedulingService implements SchedulingRepository {
   async searchByEmail(email: string): Promise<Schedule[]> {
     return this.prismaService.schedule.findMany({
       where: {
-        costumerEmail: email,
+        user: {
+          email,
+        },
         date: {
           gte: new Date(),
         },
@@ -30,6 +32,7 @@ export class SchedulingService implements SchedulingRepository {
       include: {
         services: true,
         professional: true,
+        user: true,
       },
       orderBy: {
         date: 'desc',
@@ -37,7 +40,7 @@ export class SchedulingService implements SchedulingRepository {
     })
   }
 
-  async searchByProfessionalAndDate(professionalId: number, date: Date): Promise<ProfessionalDateSearchResult[]> {
+  async searchByProfessionalAndDate(professionalId: number, date: Date): Promise<Schedule[]> {
     const year = date.getFullYear()
     const month = date.getUTCMonth()
     const day = date.getUTCDate()
@@ -53,9 +56,20 @@ export class SchedulingService implements SchedulingRepository {
           lte: endDay,
         },
       },
-      include: { services: true },
+      include: { services: true, user: true, professional: true },
     })
 
     return result
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.prismaService.schedule.delete({
+      where: {
+        id: id,
+      },
+      include: {
+        services: true,
+      },
+    })
   }
 }

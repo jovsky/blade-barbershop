@@ -4,7 +4,7 @@ import SchedulingRepository from "./interfaces/SchedulingRepository";
 export default class GetBusyTimes {
   constructor(private readonly repo: SchedulingRepository) {}
 
-  async executar(professionalId: number, date: Date): Promise<string[]> {
+  async execute(professionalId: number, date: Date): Promise<string[]> {
     const schedules = await this.repo.searchByProfessionalAndDate(
       professionalId,
       date

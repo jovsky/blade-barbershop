@@ -1,5 +1,8 @@
+version: '3.8'
+
 services:
   postgres:
+    container_name: db-barbers-blade
     image: postgres:16-alpine
     ports:
       - 5432:5432
