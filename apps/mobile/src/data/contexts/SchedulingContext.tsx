@@ -71,7 +71,7 @@ export function SchedulingProvider({
     if (!user?.email) return;
 
     await httpPost("scheduling", {
-      costumerEmail: user.email,
+      user: user!,
       date: date!,
       professional: professional!,
       services: services,

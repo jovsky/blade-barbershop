@@ -5,6 +5,13 @@ import { PhoneUtils } from '@barba/core'
 import useUser from '@/data/hooks/useUser'
 import Logo from '@/components/shared/Logo'
 import Image from 'next/image'
+import { useToast } from '../ui/toast/useToast'
+
+type FieldErrors = {
+  name?: string,
+  email?: string,
+  phone?: string,
+}
 
 export default function UserForm() {
   const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn')
@@ -13,10 +20,44 @@ export default function UserForm() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState<FieldErrors>({});
 
   const { user, signIn, signUp } = useUser()
   const params = useSearchParams()
   const router = useRouter()
+
+  const { successToast, errorToast } = useToast()
+
+  useEffect(() => {
+    setErrors({})
+  }, [name, email, phone]);
+
+  useEffect(() => {
+    Object.keys(errors).forEach((key) => {
+      errorToast(errors[key as keyof FieldErrors]!)
+    })
+  }, [errors])
+
+  function validateSignUpField() {
+    let errors: FieldErrors = {};
+
+    if (!name) {
+      errors.name = "Name is mandatory";
+    }
+    if (!email) {
+      errors.email = "E-mail is mandatory";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Invalid e-mail";
+    }
+    if (!phone) {
+      errors.phone = "Phone is mandatory";
+    } else if (!/^\d{10,11}$/.test(phone)) {
+      errors.phone = "Phone must have 10 or 11 digits";
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
 
   useEffect(() => {
     if (user?.email) {
@@ -26,12 +67,27 @@ export default function UserForm() {
   }, [user, router, params])
 
   async function submit() {
+
     if (mode === 'signIn') {
-      await signIn({ email, password })
-    } else {
-      await signUp({ name, email, password, phone })
+      try {
+        await signIn({ email, password })
+        cleanForm()
+      } catch (err) {
+        errorToast((err as any)?.response?.data?.message ?? '')
+      }
+      return
     }
-    cleanForm()
+
+    if (!validateSignUpField()) return
+
+    try {
+      await signUp({ name, email, password, phone })
+      successToast('Successfully registered!')
+
+    } catch (err) {
+      errorToast((err as any)?.response?.data?.message ?? '')
+    }
+    
   }
 
   function cleanForm() {

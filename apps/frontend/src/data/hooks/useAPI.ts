@@ -15,7 +15,7 @@ export default function useAPI() {
     },
   }
 
-  const adjustURI = (uri: string) =>  uri.startsWith('/') ? uri : `/${uri}`
+  const adjustURI = (uri: string) =>  uri.startsWith('/') ? uri.slice(1) : uri
 
   const httpGet = useCallback(async function <T>(uri: string): Promise<T | undefined> {
     try {
@@ -27,22 +27,14 @@ export default function useAPI() {
   }, [])
 
   const httpPost = useCallback(async function <T>(uri: string, body: any): Promise<T | undefined> {
-    try {
-      const { data } = await axios.post(`${URL_BASE}/${adjustURI(uri)}`, body, config)
-      return data
-    } catch (error) {
-      console.error(error)
-    }
+    const { data } = await axios.post(`${URL_BASE}/${adjustURI(uri)}`, body, config)
+    return data
   }, [])
 
   /* For any late implementation */
   const httpDelete = useCallback(async function <T>(uri: string): Promise<T | undefined> {
-    try {
-      const { data } = await axios.delete(`${URL_BASE}/${adjustURI(uri)}`, )
-      return data
-    } catch (error) {
-      console.error(error)
-    }
+    const { data } = await axios.delete(`${URL_BASE}/${adjustURI(uri)}`, )
+    return data
   }, [])
 
   return { httpGet, httpPost, httpDelete }

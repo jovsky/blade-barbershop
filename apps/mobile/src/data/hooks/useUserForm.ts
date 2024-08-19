@@ -1,5 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useUser from "./useUser";
+
+const defaultErrors = {
+  name: "",
+  email: "",
+  phone: "",
+};
 
 export default function useUserForm() {
   const { signIn } = useUser();
@@ -7,7 +13,11 @@ export default function useUserForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
+  const [errors, setErrors] = useState(defaultErrors);
+
+  useEffect(() => {
+    setErrors(defaultErrors)
+  }, [name, email, phone]);
 
   function validate() {
     let errors: any = {};

@@ -43,7 +43,7 @@ export function UserProvider({ children }: React.PropsWithChildren) {
 
   async function signIn(user: Partial<User>) {
     const token = await httpPost<string | undefined>('/user/sign-in', user)
-    
+
     cookie.set(cookieName, token || '', {
       expires: 1,
       sameSite: 'None',
@@ -54,15 +54,14 @@ export function UserProvider({ children }: React.PropsWithChildren) {
   }
 
   async function signUp(user: User) {
-    // TO:DO: handle success message and errors
     await httpPost('/user/sign-up', user)
   }
 
   function signOut() {
-      setToken(null)
-      setUser(null)
-      cookie.remove(cookieName)
-      router.push('/')
+    setToken(null)
+    setUser(null)
+    cookie.remove(cookieName)
+    router.push('/')
   }
 
   return (
