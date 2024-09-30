@@ -13,8 +13,8 @@ async function seed() {
   await prisma.user.createMany({
     data: [
       {
-        name: 'John Blade',
-        email: 'joao@barbersblade.app',
+        name: 'Jhonny Blade',
+        email: 'jhonny@barbersblade.app',
         // password is: #Senha123
         password: '$2b$10$9LQTRK3LRzIddKYW2C4MTelydFzk5Ys4JoROPajNqvYshhrn1PRa6',
         phone: '11999999999',

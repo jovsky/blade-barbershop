@@ -19,7 +19,7 @@ export default function useAPI() {
 
   const httpGet = useCallback(async function <T>(uri: string): Promise<T | undefined> {
     try {
-      const { data } = await axios.get(`${URL_BASE}/${adjustURI(uri)}`, )
+      const { data } = await axios.get(`${URL_BASE}/${adjustURI(uri)}`, config)
       return data
     } catch (error) {
       console.error(error)
@@ -33,7 +33,7 @@ export default function useAPI() {
 
   /* For any late implementation */
   const httpDelete = useCallback(async function <T>(uri: string): Promise<T | undefined> {
-    const { data } = await axios.delete(`${URL_BASE}/${adjustURI(uri)}`, )
+    const { data } = await axios.delete(`${URL_BASE}/${adjustURI(uri)}`, config)
     return data
   }, [])
 

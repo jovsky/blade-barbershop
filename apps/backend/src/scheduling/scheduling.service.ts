@@ -10,7 +10,7 @@ export class SchedulingService implements SchedulingRepository {
     await this.prismaService.schedule.create({
       data: {
         date: scheduling.date,
-        user: { connect: { id: scheduling.professional.id } },
+        user: { connect: { id: scheduling.user.id } },
         professional: { connect: { id: scheduling.professional.id } },
         services: {
           connect: scheduling.services.map((servico) => ({ id: servico.id })),

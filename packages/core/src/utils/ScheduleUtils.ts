@@ -1,5 +1,3 @@
-import { DateUtils } from "../../dist";
-
 export default class ScheduleUtils {
   private static minutes = [0, 15, 30, 45];
 
@@ -20,5 +18,13 @@ export default class ScheduleUtils {
         )
       )
       .flat();
+  }
+
+  static totalDuration(services: { slots: number }[]) {
+    const duration = services.reduce((acc, current) => {
+        return (acc += current.slots * 15)
+    }, 0)
+
+    return `${Math.trunc(duration / 60)}h ${duration % 60}m`
   }
 }
