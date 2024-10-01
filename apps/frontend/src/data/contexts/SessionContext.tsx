@@ -2,7 +2,7 @@
 // import { createContext, useCallback, useEffect, useState } from 'react'
 // import { jwtDecode } from 'jwt-decode'
 // import cookie from 'js-cookie'
-// import { User } from '@barba/core'
+// import { User } from '@barbers-blade/core'
 
 // interface SessionContextProps {
 //     loading: boolean

@@ -1,5 +1,5 @@
 import { useServices } from "@barbers-blade/ui";
-import { Service } from "@barba/core";
+import { Service } from "@barbers-blade/core";
 import { Image, StyleSheet, Text, Pressable, View } from "react-native";
 import images from "../../data/constants/images";
 

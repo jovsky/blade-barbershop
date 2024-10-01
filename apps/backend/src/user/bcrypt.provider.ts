@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { EncryptingProvider } from '@barba/core'
+import { EncryptingProvider } from '@barbers-blade/core'
 import * as bcrypt from 'bcrypt'
 
 @Injectable()

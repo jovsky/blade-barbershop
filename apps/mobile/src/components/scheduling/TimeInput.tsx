@@ -1,4 +1,4 @@
-import { ScheduleUtils, DateUtils } from "@barba/core";
+import { ScheduleUtils, DateUtils } from "@barbers-blade/core";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import useScheduling from "../../data/hooks/useScheduling";

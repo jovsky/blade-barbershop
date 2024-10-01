@@ -1,7 +1,7 @@
 import { FC, useCallback, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { IconX } from '@tabler/icons-react'
-import { ScheduleUtils, DateUtils } from '@barba/core'
+import { ScheduleUtils, DateUtils } from '@barbers-blade/core'
 import useScheduling from '@/data/hooks/useScheduling'
 
 export interface HoursInputProps {

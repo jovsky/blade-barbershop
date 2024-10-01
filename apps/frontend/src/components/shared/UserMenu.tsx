@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { User } from '@barba/core'
+import { User } from '@barbers-blade/core'
 import Image from 'next/image'
 import useUser from '@/data/hooks/useUser'
 import { useRouter } from 'next/navigation'

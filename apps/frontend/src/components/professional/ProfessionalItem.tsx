@@ -1,5 +1,5 @@
 import { IconBrandYoutube, IconBrandInstagram, IconBrandX, IconBrandLinkedin } from '@tabler/icons-react'
-import { Professional } from '@barba/core'
+import { Professional } from '@barbers-blade/core'
 import Image from 'next/image'
 import Reviews from '../shared/Reviews'
 

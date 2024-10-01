@@ -1,4 +1,4 @@
-import { professionals } from "@barba/core";
+import { professionals } from "@barbers-blade/core";
 
 export default function useProfessionals() {
   return {

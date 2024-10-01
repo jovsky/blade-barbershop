@@ -1,5 +1,5 @@
 import { StyleSheet, Text, Pressable, View } from "react-native";
-import { CurrencyUtils, DateUtils } from "@barba/core";
+import { CurrencyUtils, DateUtils } from "@barbers-blade/core";
 import useScheduling from "../data/hooks/useScheduling";
 
 export default function Summary({ navigation }: any) {

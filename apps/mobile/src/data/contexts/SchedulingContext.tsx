@@ -1,6 +1,6 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import { Professional, Service } from "@barba/core";
-import { DateUtils } from "@barba/core";
+import { Professional, Service } from "@barbers-blade/core";
+import { DateUtils } from "@barbers-blade/core";
 import useUser from "../hooks/useUser";
 import useAPI from "../hooks/useAPI";
 

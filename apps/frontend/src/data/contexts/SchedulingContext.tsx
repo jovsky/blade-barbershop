@@ -1,5 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from 'react'
-import { Professional, Schedule, Service, DateUtils } from '@barba/core'
+import { Professional, Schedule, Service, DateUtils } from '@barbers-blade/core'
 import useUser from '../hooks/useUser'
 import useAPI from '../hooks/useAPI'
 

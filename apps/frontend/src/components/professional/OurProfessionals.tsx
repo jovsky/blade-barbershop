@@ -1,5 +1,5 @@
 'use client'
-import { Professional } from '@barba/core'
+import { Professional } from '@barbers-blade/core'
 import ProfessionalItem from '@/components/professional/ProfessionalItem'
 import Title from '@/components/shared/Title'
 import { useProfessionals } from '@barbers-blade/ui'

@@ -1,4 +1,4 @@
-import { PhoneUtils } from "@barba/core";
+import { PhoneUtils } from "@barbers-blade/core";
 import { StyleSheet, View, Image, Text, Pressable } from "react-native";
 import useUser from "@/src/data/hooks/useUser";
 import React from "react";

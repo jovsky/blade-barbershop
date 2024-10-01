@@ -1,4 +1,4 @@
-import { Schedule, GetBusyTimes, User } from '@barba/core'
+import { Schedule, GetBusyTimes, User } from '@barbers-blade/core'
 import { Body, Controller, Delete, Get, HttpException, Param, Post } from '@nestjs/common'
 import { SchedulingService } from './scheduling.service'
 import { LoggedInUser } from 'src/user/user.decorator'

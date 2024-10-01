@@ -1,4 +1,4 @@
-import { DateUtils, LOCALE } from "@barba/core";
+import { DateUtils, LOCALE } from "@barbers-blade/core";
 import { StyleSheet, Text, Pressable, View } from "react-native";
 
 export interface DayInputProps {

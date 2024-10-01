@@ -1,4 +1,4 @@
-import { LOCALE, Schedule } from "@barba/core";
+import { LOCALE, Schedule } from "@barbers-blade/core";
 import { StyleSheet, Text, View } from "react-native";
 
 interface ScheduleItemProps {

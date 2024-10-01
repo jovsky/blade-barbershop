@@ -1,5 +1,5 @@
 'use client'
-import { Service } from '@barba/core'
+import { Service } from '@barbers-blade/core'
 import { useRouter } from 'next/navigation'
 import ServiceItem from './ServiceItem'
 import Title from '../shared/Title'

@@ -1,7 +1,7 @@
 'use client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { PhoneUtils } from '@barba/core'
+import { PhoneUtils } from '@barbers-blade/core'
 import useUser from '@/data/hooks/useUser'
 import Logo from '@/components/shared/Logo'
 import Image from 'next/image'

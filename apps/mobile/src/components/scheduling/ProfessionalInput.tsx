@@ -1,5 +1,5 @@
 import { useProfessionals } from "@barbers-blade/ui";
-import { Professional } from "@barba/core";
+import { Professional } from "@barbers-blade/core";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import images from "../../data/constants/images";
 

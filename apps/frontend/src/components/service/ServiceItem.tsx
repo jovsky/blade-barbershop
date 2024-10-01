@@ -1,4 +1,4 @@
-import { CurrencyUtils, Service } from '@barba/core'
+import { CurrencyUtils, Service } from '@barbers-blade/core'
 import Image from 'next/image'
 
 export interface ServiceItemProps {

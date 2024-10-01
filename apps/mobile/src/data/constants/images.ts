@@ -2,7 +2,7 @@ const images = {
   professionals: [
     {
       id: 1,
-      image: require("../../../assets/professionals/professional-1.jpg"),
+      image: require("../../../assets/professionals/professional-1.png"),
     },
     {
       id: 2,

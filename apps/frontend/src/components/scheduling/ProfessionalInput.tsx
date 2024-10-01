@@ -1,5 +1,5 @@
 import { useProfessionals } from '@barbers-blade/ui'
-import { Professional } from '@barba/core'
+import { Professional } from '@barbers-blade/core'
 import Image from 'next/image'
 
 export interface ProfessionalInputProps {

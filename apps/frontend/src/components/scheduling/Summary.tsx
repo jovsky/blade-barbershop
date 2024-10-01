@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react'
 import { FC, useState } from 'react'
 import useScheduling from '@/data/hooks/useScheduling'
 import { useRouter } from 'next/navigation'
-import { CurrencyUtils, DateUtils } from '@barba/core'
+import { CurrencyUtils, DateUtils } from '@barbers-blade/core'
 
 export default function Summary() {
   const [loading, setLoading] = useState(false)

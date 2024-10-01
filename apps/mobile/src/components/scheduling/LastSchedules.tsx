@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Schedule } from "@barba/core";
+import { Schedule } from "@barbers-blade/core";
 import useAPI from "../../data/hooks/useAPI";
 import React, { useEffect, useState } from "react";
 import ScheduleItem from "./ScheduleItem";

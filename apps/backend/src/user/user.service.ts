@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { User } from '@barba/core'
+import { User } from '@barbers-blade/core'
 import { PrismaService } from 'src/db/prisma.service'
 import { User as PrismaUser } from '@prisma/client'
 

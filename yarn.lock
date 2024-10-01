@@ -1289,7 +1289,7 @@
     "@babel/helper-validator-identifier" "^7.24.7"
     to-fast-properties "^2.0.0"
 
-"@barba/core@*", "@barba/core@file:C:\\Users\\João Vitor\\Projetos\\cod3r-2024\\barbearia\\barbers-blade\\packages\\core":
+"@barbers-blade/core@*", "@barbers-blade/core@file:C:\\Users\\João Vitor\\Projetos\\cod3r-2024\\barbearia\\barbers-blade\\packages\\core":
   version "1.0.0"
   resolved "file:packages/core"
   dependencies:
@@ -1299,7 +1299,7 @@
   version "0.0.0"
   resolved "file:packages/ui"
   dependencies:
-    "@barba/core" "*"
+    "@barbers-blade/core" "*"
     react "^18.2.0"
 
 "@bcoe/v8-coverage@^0.2.3":
@@ -7103,9 +7103,10 @@ fresh@0.5.2:
   version "0.1.0"
   resolved "file:apps/frontend"
   dependencies:
-    "@barba/core" "*"
+    "@barbers-blade/core" "*"
     "@barbers-blade/ui" "*"
     "@radix-ui/react-dropdown-menu" "^2.1.1"
+    "@radix-ui/react-toast" "^1.2.1"
     "@tabler/icons-react" "^3.11.0"
     axios "^1.7.2"
     class-variance-authority "^0.7.0"
@@ -9841,7 +9842,7 @@ mkdirp@^1.0.4:
   version "1.0.0"
   resolved "file:apps/mobile"
   dependencies:
-    "@barba/core" "*"
+    "@barbers-blade/core" "*"
     "@barbers-blade/ui" "*"
     "@expo/vector-icons" "^14.0.2"
     "@react-native-async-storage/async-storage" "^1.24.0"
@@ -10986,7 +10987,7 @@ react-devtools-core@^5.0.0:
     shell-quote "^1.6.1"
     ws "^7"
 
-"react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", react-dom@^18, react-dom@^18.0.0, react-dom@^18.2.0, react-dom@>=16.8.0:
+"react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", react-dom@^18, react-dom@^18.0.0, react-dom@^18.2.0, react-dom@>=16.8.0, react-dom@19.0.0-rc-f994737d14-20240522:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -11193,7 +11194,7 @@ react-test-renderer@18.2.0:
     react-shallow-renderer "^16.15.0"
     scheduler "^0.23.0"
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18, react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 16", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@>=16.8, react@>=16.8.0:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18, react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 16", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@>=16.8, react@>=16.8.0, react@19.0.0-rc-f994737d14-20240522:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
@@ -12964,22 +12965,22 @@ turbo-stream@2.2.0:
   resolved "https://registry.npmjs.org/turbo-stream/-/turbo-stream-2.2.0.tgz"
   integrity sha512-FKFg7A0To1VU4CH9YmSMON5QphK0BXjSoiC7D9yMh+mEEbXLUP9qJ4hEt1qcjKtzncs1OpcnjZO8NgrlVbZH+g==
 
-turbo-windows-64@2.0.11:
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/turbo-windows-64/-/turbo-windows-64-2.0.11.tgz"
-  integrity sha512-tja3zvVCSWu3HizOoeQv0qDJ+GeWGWRFOOM6a8i3BYnXLgGKAaDZFcjwzgC50tWiAw4aowIVR4OouwIyRhLBaQ==
+turbo-windows-64@2.0.9:
+  version "2.0.9"
+  resolved "https://registry.npmjs.org/turbo-windows-64/-/turbo-windows-64-2.0.9.tgz"
+  integrity sha512-ZVo0apxUvaRq4Vm1qhsfqKKhtRgReYlBVf9MQvVU1O9AoyydEQvLDO1ryqpXDZWpcHoFxHAQc9msjAMtE5K2lA==
 
 turbo@^2.0.9:
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/turbo/-/turbo-2.0.11.tgz"
-  integrity sha512-imDlFFAvitbCm1JtDFJ6eG882qwxHUmVT2noPb3p2jq5o5DuXOchMbkVS9kUeC3/4WpY5N0GBZ3RvqNyjHZw1Q==
+  version "2.0.9"
+  resolved "https://registry.npmjs.org/turbo/-/turbo-2.0.9.tgz"
+  integrity sha512-QaLaUL1CqblSKKPgLrFW3lZWkWG4pGBQNW+q1ScJB5v1D/nFWtsrD/yZljW/bdawg90ihi4/ftQJ3h6fz1FamA==
   optionalDependencies:
-    turbo-darwin-64 "2.0.11"
-    turbo-darwin-arm64 "2.0.11"
-    turbo-linux-64 "2.0.11"
-    turbo-linux-arm64 "2.0.11"
-    turbo-windows-64 "2.0.11"
-    turbo-windows-arm64 "2.0.11"
+    turbo-darwin-64 "2.0.9"
+    turbo-darwin-arm64 "2.0.9"
+    turbo-linux-64 "2.0.9"
+    turbo-linux-arm64 "2.0.9"
+    turbo-windows-64 "2.0.9"
+    turbo-windows-arm64 "2.0.9"
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

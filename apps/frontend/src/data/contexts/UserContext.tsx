@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { User } from '@barba/core'
+import { User } from '@barbers-blade/core'
 import useAPI from '../hooks/useAPI'
 
 import { jwtDecode, JwtPayload } from 'jwt-decode'

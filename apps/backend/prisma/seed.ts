@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { Professional as PrismaProfessional, Service as PrismaService } from 'prisma/prisma-client'
-import { services, professionals } from '@barba/core'
+import { services, professionals } from '@barbers-blade/core'
 
 const prisma = new PrismaClient()
 

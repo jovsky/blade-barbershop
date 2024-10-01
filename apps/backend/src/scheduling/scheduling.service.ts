@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { Schedule, SchedulingRepository } from '@barba/core'
+import { Schedule, SchedulingRepository } from '@barbers-blade/core'
 import { PrismaService } from 'src/db/prisma.service'
 
 @Injectable()

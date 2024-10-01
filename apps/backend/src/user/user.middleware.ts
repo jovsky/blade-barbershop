@@ -2,7 +2,7 @@ import { HttpException, Injectable, NestMiddleware } from '@nestjs/common'
 import { Response, NextFunction, Request } from 'express'
 import { UserService } from './user.service'
 import * as jwt from 'jsonwebtoken'
-import { User } from '@barba/core'
+import { User } from '@barbers-blade/core'
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {

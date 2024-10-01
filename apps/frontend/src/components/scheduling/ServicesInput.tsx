@@ -1,5 +1,5 @@
 import { useServices } from '@barbers-blade/ui'
-import { Service } from '@barba/core'
+import { Service } from '@barbers-blade/core'
 import Image from 'next/image'
 
 export interface ServicesInputProps {

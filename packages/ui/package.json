@@ -19,7 +19,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@barba/core": "*",
+    "@barbers-blade/core": "*",
     "react": "^18.2.0"
   }
 }

@@ -1,4 +1,4 @@
-import { DateUtils, LOCALE } from '@barba/core'
+import { DateUtils, LOCALE } from '@barbers-blade/core'
 
 export interface DayInputProps {
   dateTime: Date

@@ -1,5 +1,5 @@
 import { UserService } from './user.service'
-import { UserSignIn, UserSignUp, User } from '@barba/core'
+import { UserSignIn, UserSignUp, User } from '@barbers-blade/core'
 import { Body, Controller, Post } from '@nestjs/common'
 import { BcryptProvider } from './bcrypt.provider'
 import * as jwt from 'jsonwebtoken'
