@@ -2,8 +2,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import MenuSuperior from '@/components/shared/TopMenu'
+import useUser from '@/data/hooks/useUser'
 
 export default function TitleSlogan() {
+  const {user} = useUser()
   return (
     <div className="py-10 relative h-[700px]">
       <Image src="/banners/main.webp" fill alt="Barbershop" className="object-cover" />
@@ -25,7 +27,7 @@ export default function TitleSlogan() {
             </span>
           </h1>
           <p className="w-96 text-center text-zinc-400 text-base sm:text-lg font-extralight">🤘 Your style is our Rock 🤘</p>
-          <Link
+          {!user?.isBarber && <Link
             href="/scheduling"
             className="
                             bg-gradient-to-r from-green-500 to-green-600
@@ -34,7 +36,7 @@ export default function TitleSlogan() {
                         "
           >
             Schedule Now
-          </Link>
+          </Link>}
         </div>
       </div>
     </div>

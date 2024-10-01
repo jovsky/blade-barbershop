@@ -1,12 +1,12 @@
 'use client'
 import { IconCalendarCancel } from '@tabler/icons-react'
 import Header from '@/components/shared/Header'
-import ProfessionalScheduleItem from '@/components/scheduling/ProfessionalScheduleItem'
+import MySchedulesItem from '@/components/scheduling/MySchedulesItem'
 import DayInput from '@/components/scheduling/DayInput'
-import useProfessionalSchedules from '@/data/hooks/useProfessionalSchedules'
+import useMySchedules from '@/data/hooks/useMySchedules'
 
-export default function PaginaAgenda() {
-    const { date, schedules, changeDate, deleteSchedule } = useProfessionalSchedules()
+export default function SchedulePage() {
+    const { date, schedules, changeDate, deleteSchedule } = useMySchedules()
 
     return (
         <div className="flex flex-col bg-zinc-900">
@@ -16,7 +16,7 @@ export default function PaginaAgenda() {
                 {schedules.length > 0 ? (
                     <div className="flex flex-col gap-4">
                         {schedules.map((schedule) => (
-                            <ProfessionalScheduleItem
+                            <MySchedulesItem
                                 key={schedule.id}
                                 schedule={schedule}
                                 delete={deleteSchedule}

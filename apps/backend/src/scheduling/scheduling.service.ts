@@ -62,7 +62,41 @@ export class SchedulingService implements SchedulingRepository {
     return result
   }
 
+  async searchByUserAndDate(userId: number, date: Date): Promise<Schedule[]> {
+    const year = date.getFullYear()
+    const month = date.getUTCMonth()
+    const day = date.getUTCDate()
+
+    const startDay = new Date(year, month, day, 0, 0, 0)
+    const endDay = new Date(year, month, day, 23, 59, 59)
+
+    const result = await this.prismaService.schedule.findMany({
+      where: {
+        userId,
+        date: {
+          gte: startDay,
+          lte: endDay,
+        },
+      },
+      include: { services: true, user: true, professional: true },
+    })
+
+    return result
+  }
+
   async delete(id: number): Promise<void> {
+    const res = await this.prismaService.schedule.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        services: true,
+        user: true,
+      },
+    })
+
+    res?.user
+
     await this.prismaService.schedule.delete({
       where: {
         id: id,
@@ -71,5 +105,20 @@ export class SchedulingService implements SchedulingRepository {
         services: true,
       },
     })
+  }
+
+  async searchById(id: number): Promise<Schedule | null> {
+    const result = await this.prismaService.schedule.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        services: true,
+        user: true,
+        professional: true,
+      },
+    })
+
+    return result
   }
 }

@@ -7,5 +7,10 @@ export default interface SchedulingRepository {
     professional: number,
     date: Date
   ): Promise<Schedule[]>;
+  searchByUserAndDate(
+    user: number,
+    date: Date
+  ): Promise<Schedule[]>;
+  searchById(id: number): Promise<Schedule | null>;
   delete(id: number): Promise<void>
 }

@@ -1,4 +1,4 @@
-import { Schedule, GetBusyTimes, User } from '@barbers-blade/core'
+import { Schedule, GetBusyTimes, User, ValidateScheduleDeletion } from '@barbers-blade/core'
 import { Body, Controller, Delete, Get, HttpException, Param, Post } from '@nestjs/common'
 import { SchedulingService } from './scheduling.service'
 import { LoggedInUser } from 'src/user/user.decorator'
@@ -30,16 +30,25 @@ export class SchedulingController {
     return useCase.execute(+professional, new Date(dateParam))
   }
 
-  @Get(':professional/:date')
+  @Get('professional/:professional/:date')
   searchByProfessionalAndDate(@Param('professional') professional: string, @Param('date') dateParam: string) {
     return this.service.searchByProfessionalAndDate(+professional, new Date(dateParam))
   }
 
+  @Get('user/:user/:date')
+  searchByUserAndDate(@Param('user') user: string, @Param('date') dateParam: string) {
+    return this.service.searchByUserAndDate(+user, new Date(dateParam))
+  }
+
   @Delete(':id')
   async delete(@Param('id') id: string, @LoggedInUser() loggedInUser: User) {
-    if (!loggedInUser.isBarber) {
-      throw new HttpException('Unauthorized user, only barbers can delete', 401)
-    }
+    const useCase = new ValidateScheduleDeletion(this.service)
+    const errorCode = await useCase.execute(id, loggedInUser)
+
+    if (errorCode === 404) throw new HttpException('Schedule not found', 404)
+
+    if (errorCode === 401) throw new HttpException('Unauthorized action, you can only delete your schedules', 401)
+
     await this.service.delete(+id)
   }
 }
