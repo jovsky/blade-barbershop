@@ -27,7 +27,7 @@ export function UserProvider({ children }: React.PropsWithChildren) {
   const [loading, setLoading] = useState(true)
   const [token, setToken] = useState<string | null>(null)
   const [user, setUser] = useState<User | null>(null)
-  
+
   const loadSession = useCallback(() => {
     try {
       setLoading(true)
@@ -72,7 +72,7 @@ export function UserProvider({ children }: React.PropsWithChildren) {
         signIn,
         signUp,
         signOut,
-        token
+        token,
       }}
     >
       {children}
@@ -85,26 +85,26 @@ function getState(): { token: string; user: User } | null {
   if (!jwt) return null
 
   try {
-      const decoded = jwtDecode<JwtPayload & User>(jwt)
-      const expired = decoded.exp ? decoded.exp < Date.now() / 1000 : null
+    const decoded = jwtDecode<JwtPayload & User>(jwt)
+    const expired = decoded.exp ? decoded.exp < Date.now() / 1000 : null
 
-      if (expired) {
-          cookie.remove(cookieName)
-          return null
-      }
-      
-      return {
-          token: jwt,
-          user: {
-              id: decoded.id,
-              name: decoded.name,
-              email: decoded.email,
-              isBarber: decoded.isBarber,
-          },
-      }
-  } catch (error) {
+    if (expired) {
       cookie.remove(cookieName)
       return null
+    }
+
+    return {
+      token: jwt,
+      user: {
+        id: decoded.id,
+        name: decoded.name,
+        email: decoded.email,
+        isBarber: decoded.isBarber,
+      },
+    }
+  } catch (error) {
+    cookie.remove(cookieName)
+    return null
   }
 }
 

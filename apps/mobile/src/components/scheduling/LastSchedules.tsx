@@ -1,23 +1,23 @@
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Schedule } from "@barbers-blade/core";
-import useAPI from "../../data/hooks/useAPI";
-import React, { useEffect, useState } from "react";
-import ScheduleItem from "./ScheduleItem";
-import useUser from "@/src/data/hooks/useUser";
+import { StyleSheet, Text, View, Image } from 'react-native'
+import { Schedule } from '@barbers-blade/core'
+import useAPI from '../../data/hooks/useAPI'
+import React, { useEffect, useState } from 'react'
+import ScheduleItem from './ScheduleItem'
+import useUser from '@/src/data/hooks/useUser'
 
 export default function LastSchedules() {
-  const [schedules, setSchedules] = useState<Schedule[]>();
-  const { httpGet } = useAPI();
-  const { user } = useUser();
+  const [schedules, setSchedules] = useState<Schedule[]>()
+  const { httpGet } = useAPI()
+  const { user } = useUser()
 
   useEffect(() => {
-    loadSchedules();
-  }, [user]);
+    loadSchedules()
+  }, [user])
 
   async function loadSchedules() {
-    if (!user?.email) return;
-    const schedules = await httpGet(`scheduling/${user?.email}`);
-    setSchedules(schedules);
+    if (!user?.email) return
+    const schedules = await httpGet(`scheduling/${user?.email}`)
+    setSchedules(schedules)
   }
 
   function renderContent() {
@@ -25,76 +25,68 @@ export default function LastSchedules() {
       return (
         <View>
           <Text style={styles.subtitle}>Here are your last schedules:</Text>
-          {schedules
-            ?.reverse()
-            .map((s: Schedule) => <ScheduleItem schedule={s} key={s.id} />)}
+          {schedules?.reverse().map((s: Schedule) => <ScheduleItem schedule={s} key={s.id} />)}
         </View>
-      );
+      )
     } else {
       return (
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Text style={styles.subtitle}>You don't have any schedules yet.</Text>
           <Text style={styles.subtitle}>Shall we schedule a new service?</Text>
-          <Image
-            source={require("../../../assets/home/cover-boy.png")}
-            style={styles.coverBoy}
-          />
+          <Image source={require('../../../assets/home/cover-boy.png')} style={styles.coverBoy} />
         </View>
-      );
+      )
     }
   }
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../../assets/home/barbers-logo.png")}
-        style={styles.logo}
-      />
+      <Image source={require('../../../assets/home/barbers-logo.png')} style={styles.logo} />
       <Text style={styles.title}>Hey, {user?.name}!</Text>
       {renderContent()}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: 12,
   },
   title: {
     fontSize: 30,
-    color: "#e4e4e7",
-    fontWeight: "800",
-    textAlign: "center",
+    color: '#e4e4e7',
+    fontWeight: '800',
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    textAlign: "center",
-    color: "#e4e4e7",
+    textAlign: 'center',
+    color: '#e4e4e7',
   },
   scheduleItemContainer: {
-    backgroundColor: "#09090b",
+    backgroundColor: '#09090b',
     borderRadius: 10,
     height: 144,
   },
   scheduleItemContent: {
-    flexDirection: "column",
-    justifyContent: "center",
+    flexDirection: 'column',
+    justifyContent: 'center',
     padding: 20,
   },
   scheduleItemText: {
     fontSize: 16,
-    color: "white",
+    color: 'white',
   },
   scheduleTitle: {
     fontSize: 40,
-    color: "white",
+    color: 'white',
   },
   scheduleTime: {
     fontSize: 25,
-    color: "white",
+    color: 'white',
   },
   logo: {
     marginTop: 20,
@@ -103,4 +95,4 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
   },
-});
+})

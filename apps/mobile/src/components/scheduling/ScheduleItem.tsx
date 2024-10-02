@@ -1,52 +1,44 @@
-import { LOCALE, Schedule } from "@barbers-blade/core";
-import { StyleSheet, Text, View } from "react-native";
+import { LOCALE, Schedule } from '@barbers-blade/core'
+import { StyleSheet, Text, View } from 'react-native'
 
 interface ScheduleItemProps {
-  schedule: Schedule;
+  schedule: Schedule
 }
 
 export default function ScheduleItem(props: ScheduleItemProps) {
-  const cor =
-    new Date(props.schedule.date).getTime() > Date.now()
-      ? "#007aff"
-      : "#AAAAAA";
+  const cor = new Date(props.schedule.date).getTime() > Date.now() ? '#007aff' : '#AAAAAA'
 
   function formatDate(time: Date) {
     if (!(time instanceof Date) || isNaN(time.getTime())) {
-      return "";
+      return ''
     }
 
     return time.toLocaleDateString(LOCALE, {
-      dateStyle: "long",
-    });
+      dateStyle: 'long',
+    })
   }
 
   function formatTime(time: Date) {
     if (!(time instanceof Date) || isNaN(time.getTime())) {
-      return "";
+      return ''
     }
-    return ` às ${String(time.getHours()).padStart(2, "0")}:${String(time.getMinutes()).padStart(2, "0")}h`;
+    return ` às ${String(time.getHours()).padStart(2, '0')}:${String(time.getMinutes()).padStart(2, '0')}h`
   }
 
   function sumTotalServices() {
-    return props.schedule.services.reduce(
-      (acc, service) => acc + service.price,
-      0
-    );
+    return props.schedule.services.reduce((acc, service) => acc + service.price, 0)
   }
 
   function renderServices() {
     return props.schedule.services.reduce((acc, service, index) => {
-      return `${acc}${index + 1}. ${service.name}${index < props.schedule.services.length - 1 ? ", " : ""}`;
-    }, "");
+      return `${acc}${index + 1}. ${service.name}${index < props.schedule.services.length - 1 ? ', ' : ''}`
+    }, '')
   }
 
   return (
     <View style={{ ...styles.card, borderColor: cor }}>
       <Text style={{ ...styles.professionalName }}>
-        {props.schedule.professional.name
-          ? props.schedule.professional.name
-          : "Não informado"}
+        {props.schedule.professional.name ? props.schedule.professional.name : 'Não informado'}
       </Text>
       <Text style={{ ...styles.time, color: cor }}>
         {props.schedule.date && formatDate(new Date(props.schedule.date))}
@@ -55,39 +47,39 @@ export default function ScheduleItem(props: ScheduleItemProps) {
       <Text style={styles.services}>{renderServices()}</Text>
       <Text style={styles.price}>{`R$ ${sumTotalServices()},00`}</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#1a1a1a",
+    backgroundColor: '#1a1a1a',
     padding: 16,
     paddingLeft: 35,
     borderRadius: 8,
     margin: 8,
     borderWidth: 0.5,
     borderRightWidth: 10,
-    minWidth: "90%",
+    minWidth: '90%',
   },
   professionalName: {
     fontSize: 14,
-    color: "#ffffff",
+    color: '#ffffff',
     marginBottom: 4,
   },
   time: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 4,
   },
   services: {
     fontSize: 12,
-    color: "#ffffff",
+    color: '#ffffff',
     marginBottom: 8,
   },
   price: {
     fontSize: 14,
-    color: "#ffffff",
-    fontWeight: "bold",
-    fontStyle: "italic",
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
   },
-});
+})

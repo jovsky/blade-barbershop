@@ -1,49 +1,49 @@
-"use client";
-import { createContext, PropsWithChildren, useCallback, useEffect, useState } from "react";
-import { User } from "@barbers-blade/core";
-import useLocalStorage from "../hooks/useLocalStorage";
+'use client'
+import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react'
+import { User } from '@barbers-blade/core'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export interface UserContextProps {
-  loading: boolean;
-  user: User | null;
-  signIn: (user: User) => Promise<void>;
-  signOut: () => void;
+  loading: boolean
+  user: User | null
+  signIn: (user: User) => Promise<void>
+  signOut: () => void
 }
 
-const UserContext = createContext<UserContextProps>({} as any);
+const UserContext = createContext<UserContextProps>({} as any)
 
 export function UserProvider({ children }: PropsWithChildren) {
-  const { get, set } = useLocalStorage();
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+  const { get, set } = useLocalStorage()
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<User | null>(null)
 
   const loadUser = useCallback(
     async function () {
       try {
-        const localUser = await get("user");
+        const localUser = await get('user')
         if (localUser) {
-          setUser(localUser);
+          setUser(localUser)
         }
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     },
     [get]
-  );
+  )
 
   async function signIn(user: User) {
-    setUser(user);
-    await set("user", user);
+    setUser(user)
+    await set('user', user)
   }
 
   function signOut() {
-    setUser(null);
-    set("user", null);
+    setUser(null)
+    set('user', null)
   }
 
   useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+    loadUser()
+  }, [loadUser])
 
   return (
     <UserContext.Provider
@@ -56,7 +56,7 @@ export function UserProvider({ children }: PropsWithChildren) {
     >
       {children}
     </UserContext.Provider>
-  );
+  )
 }
 
-export default UserContext;
+export default UserContext

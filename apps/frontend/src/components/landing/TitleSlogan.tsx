@@ -5,7 +5,7 @@ import MenuSuperior from '@/components/shared/TopMenu'
 import useUser from '@/data/hooks/useUser'
 
 export default function TitleSlogan() {
-  const {user} = useUser()
+  const { user } = useUser()
   return (
     <div className="py-10 relative h-[700px]">
       <Image src="/banners/main.webp" fill alt="Barbershop" className="object-cover" />
@@ -26,17 +26,21 @@ export default function TitleSlogan() {
               Transformations
             </span>
           </h1>
-          <p className="w-96 text-center text-zinc-400 text-base sm:text-lg font-extralight">🤘 Your style is our Rock 🤘</p>
-          {!user?.isBarber && <Link
-            href="/scheduling"
-            className="
+          <p className="w-96 text-center text-zinc-400 text-base sm:text-lg font-extralight">
+            🤘 Your style is our Rock 🤘
+          </p>
+          {!user?.isBarber && (
+            <Link
+              href="/scheduling"
+              className="
                             bg-gradient-to-r from-green-500 to-green-600
                             text-white font-semibold text-base md:text-lg
                             py-2 px-4 rounded-md hover:from-green-600 hover:to-green-700
                         "
-          >
-            Schedule Now
-          </Link>}
+            >
+              Schedule Now
+            </Link>
+          )}
         </div>
       </div>
     </div>

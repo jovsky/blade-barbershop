@@ -35,7 +35,7 @@ export default function UserMenu(props: MenuUserProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => router.push('/schedule')}>
-            {user?.isBarber ? 'Barber Schedules' : 'User Schedules' }
+          {user?.isBarber ? 'Barber Schedules' : 'User Schedules'}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>

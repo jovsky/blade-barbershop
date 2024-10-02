@@ -3,13 +3,13 @@ import { StyleSheet, Text, TextInput, Pressable, View, ImageBackground, Image } 
 import useUser from '../data/hooks/useUser'
 import React, { useEffect } from 'react'
 import useUserForm from '../data/hooks/useUserForm'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 type Props = {
-  navigation: NativeStackNavigationProp<{ Main: undefined }, 'Main'>;
-};
+  navigation: NativeStackNavigationProp<{ Main: undefined }, 'Main'>
+}
 
-export default function Register({ navigation }: Props ) {
+export default function Register({ navigation }: Props) {
   const { user } = useUser()
   const { name, setName, email, setEmail, phone, setPhone, errors, register } = useUserForm()
 
@@ -25,7 +25,9 @@ export default function Register({ navigation }: Props ) {
         <View style={styles.content}>
           <Image source={require('../../assets/home/barbers-logo.png')} style={styles.logo} />
           <Text style={styles.title}>🤘 FROM CLASSIC TO ROCK 🤘</Text>
-          <Text style={styles.descricao}>Sharp hair, lumberjack beard and biker hands, all to the sound of heavy rock!</Text>
+          <Text style={styles.descricao}>
+            Sharp hair, lumberjack beard and biker hands, all to the sound of heavy rock!
+          </Text>
           <View style={styles.form}>
             <Text style={styles.label}>Name</Text>
             <TextInput

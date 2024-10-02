@@ -1,5 +1,5 @@
-import { User } from "../user";
-import SchedulingRepository from "./interfaces/SchedulingRepository";
+import { User } from '../user'
+import SchedulingRepository from './interfaces/SchedulingRepository'
 
 export default class ValidateScheduleDeletion {
   constructor(private readonly repo: SchedulingRepository) {}
@@ -15,8 +15,7 @@ export default class ValidateScheduleDeletion {
     ) {
       return 401
     }
-    
 
-    return null;
+    return null
   }
 }

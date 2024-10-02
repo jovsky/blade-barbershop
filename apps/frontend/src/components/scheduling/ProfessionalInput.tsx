@@ -7,7 +7,11 @@ export interface ProfessionalInputProps {
   onProfessionalChange: (professional: Professional) => void
 }
 
-const ProfessionalOption = (props: { professional: Professional; onClick: (p: Professional) => void; isSelected?: boolean }) => {
+const ProfessionalOption = (props: {
+  professional: Professional
+  onClick: (p: Professional) => void
+  isSelected?: boolean
+}) => {
   return (
     <div
       className={`

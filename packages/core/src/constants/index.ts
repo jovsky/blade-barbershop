@@ -1,9 +1,9 @@
-import costumers from "./costumers";
-import professionals from "./professionals";
-import services from "./services";
+import costumers from './costumers'
+import professionals from './professionals'
+import services from './services'
 
-const SLOT_TIME = 15;
+const SLOT_TIME = 15
 
-const LOCALE: string = "en-US";
+const LOCALE: string = 'en-US'
 
-export { SLOT_TIME, LOCALE, costumers, professionals, services };
+export { SLOT_TIME, LOCALE, costumers, professionals, services }

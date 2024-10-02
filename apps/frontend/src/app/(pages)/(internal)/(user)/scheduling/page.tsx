@@ -12,7 +12,8 @@ export default function SchedulingPage() {
   const [nextStepAllowed, setNextStepAllowed] = useState<boolean>(false)
   const [currentStep, setCurrentStep] = useState(0)
 
-  const { professional, services, dateTime, selectProfessional, selectServices, selectDateTime, numberSlots } = useScheduling()
+  const { professional, services, dateTime, selectProfessional, selectServices, selectDateTime, numberSlots } =
+    useScheduling()
 
   useEffect(() => {
     if (currentStep === 0) {

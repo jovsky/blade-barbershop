@@ -1,85 +1,77 @@
-import { ScheduleUtils, DateUtils } from "@barbers-blade/core";
-import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import useScheduling from "../../data/hooks/useScheduling";
+import { ScheduleUtils, DateUtils } from '@barbers-blade/core'
+import { useState } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import useScheduling from '../../data/hooks/useScheduling'
 
 interface TimeInputProps {
-  dateTime: Date;
-  numberSlots: number;
-  onDateChange(data: Date): void;
+  dateTime: Date
+  numberSlots: number
+  onDateChange(data: Date): void
 }
 
 export default function TimeInput(props: TimeInputProps) {
-  const [currentTime, setCurrentTime] = useState<string | null>(null);
-  const { busyTimes } = useScheduling();
-  const { morning, afternoon, night } = ScheduleUtils.dayHours();
+  const [currentTime, setCurrentTime] = useState<string | null>(null)
+  const { busyTimes } = useScheduling()
+  const { morning, afternoon, night } = ScheduleUtils.dayHours()
 
-  const timeSelected = DateUtils.getLocaleFormattedTime(props.dateTime);
+  const timeSelected = DateUtils.getLocaleFormattedTime(props.dateTime)
 
   function getPeriod(time: string | null, qty: number) {
-    if (!time) return [];
-    const times = morning.includes(time)
-      ? morning
-      : afternoon.includes(time)
-        ? afternoon
-        : night;
-    const index = times.findIndex((h) => time == h);
-    return times.slice(index, index + qty);
+    if (!time) return []
+    const times = morning.includes(time) ? morning : afternoon.includes(time) ? afternoon : night
+    const index = times.findIndex((h) => time == h)
+    return times.slice(index, index + qty)
   }
 
   function renderTime(time: string) {
-    const period = getPeriod(currentTime, props.numberSlots);
-    const hasTime = period.length === props.numberSlots;
+    const period = getPeriod(currentTime, props.numberSlots)
+    const hasTime = period.length === props.numberSlots
 
-    const selectedPeriod = getPeriod(timeSelected, props.numberSlots);
+    const selectedPeriod = getPeriod(timeSelected, props.numberSlots)
 
-    const selected =
-      selectedPeriod.length === props.numberSlots &&
-      selectedPeriod.includes(time);
+    const selected = selectedPeriod.length === props.numberSlots && selectedPeriod.includes(time)
 
-    const blockedPeriod = period.some((h) =>
-      busyTimes.some((busy) => busy === h)
-    );
+    const blockedPeriod = period.some((h) => busyTimes.some((busy) => busy === h))
 
-    const unavailableTime = selectedPeriod.includes(time);
-    const busy = busyTimes.includes(time);
+    const unavailableTime = selectedPeriod.includes(time)
+    const busy = busyTimes.includes(time)
 
     const getButtonProps = () => {
       if (selected && !blockedPeriod && !busy) {
         return {
-          background: "#22c55e",
+          background: '#22c55e',
           disabled: false,
-        };
+        }
       } else if (blockedPeriod && !busy && unavailableTime) {
         return {
-          background: "#ef4444",
+          background: '#ef4444',
           disabled: true,
-        };
+        }
       } else if (!hasTime && !busy && selectedPeriod.includes(time)) {
         return {
-          background: "#ef4444",
+          background: '#ef4444',
           disabled: true,
-        };
+        }
       } else if (busy) {
         return {
-          background: "#09090b",
+          background: '#09090b',
           disabled: true,
-        };
+        }
       } else {
         return {
-          background: "#18181b",
+          background: '#18181b',
           disabled: false,
-        };
+        }
       }
-    };
+    }
 
     return (
       <Pressable
         key={time}
         onPress={() => {
-          setCurrentTime(time);
-          if (getButtonProps().disabled) return;
-          props.onDateChange(DateUtils.applyTime(props.dateTime, time));
+          setCurrentTime(time)
+          if (getButtonProps().disabled) return
+          props.onDateChange(DateUtils.applyTime(props.dateTime, time))
         }}
         style={{
           ...styles.timeContainer,
@@ -88,15 +80,15 @@ export default function TimeInput(props: TimeInputProps) {
       >
         {getButtonProps().disabled ? (
           <View style={styles.timeContent}>
-            <Text style={{ color: "#e4e4e7" }}>X</Text>
+            <Text style={{ color: '#e4e4e7' }}>X</Text>
           </View>
         ) : (
           <View style={styles.timeContent}>
-            <Text style={{ color: "#e4e4e7" }}>{time}</Text>
+            <Text style={{ color: '#e4e4e7' }}>{time}</Text>
           </View>
         )}
       </Pressable>
-    );
+    )
   }
 
   return (
@@ -114,7 +106,7 @@ export default function TimeInput(props: TimeInputProps) {
         <View style={styles.timesContent}>{night.map(renderTime)}</View>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -122,28 +114,28 @@ const styles = StyleSheet.create({
     gap: 30,
   },
   textTimes: {
-    color: "#e4e4e7",
+    color: '#e4e4e7',
     fontSize: 18,
     marginBottom: 10,
-    textAlign: "center",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   timesContent: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 6,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   timeContent: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   timeContainer: {
     borderWidth: 1,
-    borderColor: "#27272a",
+    borderColor: '#27272a',
     padding: 10,
     borderRadius: 6,
     width: 90,
   },
-});
+})

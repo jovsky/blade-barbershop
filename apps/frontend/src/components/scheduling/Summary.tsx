@@ -24,7 +24,9 @@ export default function Summary() {
   const SelectedService: FC<{ serviceName: string; number: number }> = ({ serviceName, number }) => {
     return (
       <div className="flex items-center  bg-zinc-700 rounded-md">
-        <span className="flex justify-center items-center text-xs text-zinc-400 px-3 bg-black/25 w-5 py-1.5">{number}</span>
+        <span className="flex justify-center items-center text-xs text-zinc-400 px-3 bg-black/25 w-5 py-1.5">
+          {number}
+        </span>
         <span className="text-sm font-light text-zinc-300 px-2">{serviceName}</span>
       </div>
     )

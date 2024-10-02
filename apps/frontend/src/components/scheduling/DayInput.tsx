@@ -22,7 +22,9 @@ export default function DayInput(props: DayInputProps) {
       >
         <div className="flex items-center gap-1">
           <span className="text-2xl font-black">{date.getDate()}</span>
-          <span className="text-xs font-light uppercase">{date.toLocaleDateString(LOCALE, { month: 'short' }).slice(0, 3)}</span>
+          <span className="text-xs font-light uppercase">
+            {date.toLocaleDateString(LOCALE, { month: 'short' }).slice(0, 3)}
+          </span>
         </div>
         <div
           className={`

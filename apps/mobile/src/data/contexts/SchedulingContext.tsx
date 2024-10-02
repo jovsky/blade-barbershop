@@ -1,112 +1,106 @@
-import { createContext, useCallback, useEffect, useState } from "react";
-import { Professional, Service } from "@barbers-blade/core";
-import { DateUtils } from "@barbers-blade/core";
-import useUser from "../hooks/useUser";
-import useAPI from "../hooks/useAPI";
+import { createContext, useCallback, useEffect, useState } from 'react'
+import { Professional, Service } from '@barbers-blade/core'
+import { DateUtils } from '@barbers-blade/core'
+import useUser from '../hooks/useUser'
+import useAPI from '../hooks/useAPI'
 
 interface SchedulingContextProps {
-  professional: Professional | null;
-  services: Service[];
-  dateTime: Date;
-  busyTimes: string[];
-  totalDuration(): string;
-  totalPrice(): number;
-  numberSlots(): number;
-  selectProfessional(professional: Professional): void;
-  selectServices(services: Service[]): void;
-  selectDate(date: Date): void;
-  schedule(): Promise<void>;
+  professional: Professional | null
+  services: Service[]
+  dateTime: Date
+  busyTimes: string[]
+  totalDuration(): string
+  totalPrice(): number
+  numberSlots(): number
+  selectProfessional(professional: Professional): void
+  selectServices(services: Service[]): void
+  selectDate(date: Date): void
+  schedule(): Promise<void>
 }
 
-export const SchedulingContext = createContext({} as SchedulingContextProps);
+export const SchedulingContext = createContext({} as SchedulingContextProps)
 
-export function SchedulingProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [professional, setProfessional] = useState<Professional | null>(null);
-  const [services, setServices] = useState<Service[]>([]);
-  const [date, setDate] = useState<Date>(DateUtils.today());
+export function SchedulingProvider({ children }: { children: React.ReactNode }) {
+  const [professional, setProfessional] = useState<Professional | null>(null)
+  const [services, setServices] = useState<Service[]>([])
+  const [date, setDate] = useState<Date>(DateUtils.today())
 
-  const { user } = useUser();
-  const [busyTimes, setBusyTimes] = useState<string[]>([]);
-  const { httpGet, httpPost } = useAPI();
+  const { user } = useUser()
+  const [busyTimes, setBusyTimes] = useState<string[]>([])
+  const { httpGet, httpPost } = useAPI()
 
   function selectProfessional(professional: Professional) {
-    setProfessional(professional);
+    setProfessional(professional)
   }
 
   function selectServices(services: Service[]) {
-    setServices(services);
+    setServices(services)
   }
 
   function totalDuration() {
     const duration = services.reduce((acc, current) => {
-      return (acc += current.slots * 15);
-    }, 0);
+      return (acc += current.slots * 15)
+    }, 0)
 
-    return `${Math.trunc(duration / 60)}h ${duration % 60}m`;
+    return `${Math.trunc(duration / 60)}h ${duration % 60}m`
   }
 
   function totalPrice() {
     return services.reduce((acc, current) => {
-      return (acc += current.price);
-    }, 0);
+      return (acc += current.price)
+    }, 0)
   }
 
   const selectDate = useCallback(function (hour: Date) {
-    setDate(hour);
-  }, []);
+    setDate(hour)
+  }, [])
 
   function numberSlots() {
     const total = services.reduce((acc, service) => {
-      return (acc += service.slots);
-    }, 0);
+      return (acc += service.slots)
+    }, 0)
 
-    return total;
+    return total
   }
 
   async function schedule() {
-    if (!user?.email) return;
+    if (!user?.email) return
 
-    await httpPost("scheduling", {
+    await httpPost('scheduling', {
       user: user!,
       date: date!,
       professional: professional!,
       services: services,
-    });
+    })
 
-    clean();
+    clean()
   }
 
   function clean() {
-    setDate(DateUtils.today());
-    setBusyTimes([]);
-    setProfessional(null);
-    setServices([]);
+    setDate(DateUtils.today())
+    setBusyTimes([])
+    setProfessional(null)
+    setServices([])
   }
 
   const getBusyTimes = useCallback(
     async function (date: Date, professional: Professional): Promise<string[]> {
       try {
-        if (!date || !professional) return [];
-        const dtString = date.toISOString().slice(0, 10);
-        const busyTimes = await httpGet(
-          `scheduling/busy-times/${professional!.id}/${dtString}`
-        );
-        return busyTimes ?? [];
+        if (!date || !professional) return []
+        const dtString = date.toISOString().slice(0, 10)
+        const busyTimes = await httpGet(`scheduling/busy-times/${professional!.id}/${dtString}`)
+        return busyTimes ?? []
       } catch (e) {
-        return [];
+        return []
       }
     },
     [httpGet]
-  );
+  )
 
   useEffect(() => {
-    if (!date || !professional) return;
-    getBusyTimes(date, professional).then(setBusyTimes);
-  }, [date, professional, getBusyTimes]);
+    if (!date || !professional) return
+    getBusyTimes(date, professional).then(setBusyTimes)
+  }, [date, professional, getBusyTimes])
 
   return (
     <SchedulingContext.Provider
@@ -126,5 +120,5 @@ export function SchedulingProvider({
     >
       {children}
     </SchedulingContext.Provider>
-  );
+  )
 }

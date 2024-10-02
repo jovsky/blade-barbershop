@@ -12,7 +12,7 @@ export default function OurCostumers() {
     return {
       id: cliente.id,
       content: <CostumerItem name={cliente.name} testimony={cliente.testimony} />,
-      className: classes[i],
+      className: classes[i % classes.length]!,
       thumbnail: cliente.imagemURL,
     }
   })

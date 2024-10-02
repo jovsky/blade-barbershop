@@ -3,17 +3,17 @@ import EncryptingProvider from './interfaces/EncryptingProvider'
 import UserRepository from './interfaces/UserRepository'
 
 export default class UserSignUp {
-    constructor(
-        private readonly repo: UserRepository,
-        private readonly cripto: EncryptingProvider
-    ) {}
+  constructor(
+    private readonly repo: UserRepository,
+    private readonly cripto: EncryptingProvider
+  ) {}
 
-    async execute(user: User): Promise<void> {
-        const existingUser = await this.repo.searchByEmail(user.email)
-        if (existingUser) throw new Error('User already exists')
+  async execute(user: User): Promise<void> {
+    const existingUser = await this.repo.searchByEmail(user.email)
+    if (existingUser) throw new Error('User already exists')
 
-        const encryptedPassword = await this.cripto.encrypt(user.password)
-        const novoUser: User = { ...user, password: encryptedPassword, isBarber: false }
-        await this.repo.save(novoUser)
-    }
+    const encryptedPassword = await this.cripto.encrypt(user.password)
+    const novoUser: User = { ...user, password: encryptedPassword, isBarber: false }
+    await this.repo.save(novoUser)
+  }
 }

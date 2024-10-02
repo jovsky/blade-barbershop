@@ -3,7 +3,7 @@ import { Professional, Schedule, Service, DateUtils } from '@barbers-blade/core'
 import useUser from '../hooks/useUser'
 import useAPI from '../hooks/useAPI'
 
-interface SchedulingContextProps {
+export interface SchedulingContextProps {
   professional: Professional | null
   services: Service[]
   dateTime: Date
@@ -91,7 +91,7 @@ export function SchedulingProvider({ children }: { children: React.ReactNode }) 
         return []
       }
     },
-    [httpGet],
+    [httpGet]
   )
 
   useEffect(() => {

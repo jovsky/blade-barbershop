@@ -4,18 +4,17 @@ import useUser from './useUser'
 
 const URL_BASE = process.env.NEXT_PUBLIC_API_URL
 
-
 export default function useAPI() {
   const { token } = useUser()
-  
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   }
 
-  const adjustURI = (uri: string) =>  uri.startsWith('/') ? uri.slice(1) : uri
+  const adjustURI = (uri: string) => (uri.startsWith('/') ? uri.slice(1) : uri)
 
   const httpGet = useCallback(async function <T>(uri: string): Promise<T | undefined> {
     try {

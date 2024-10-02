@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@repo/typescript-config/react-library.json",
+    "@barbers-blade/typescript-config/react-library.json",
     "../typescript-config/base.json"
   ],
   "compilerOptions": {

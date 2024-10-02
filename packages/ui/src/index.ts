@@ -1,4 +1,4 @@
-import useServices from "./hooks/useServices";
-import useProfessionals from "./hooks/useProfessionals";
+import useServices from './hooks/useServices'
+import useProfessionals from './hooks/useProfessionals'
 
-export { useServices, useProfessionals };
+export { useServices, useProfessionals }

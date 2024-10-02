@@ -16,7 +16,14 @@ interface TimeSlotProps extends HoursInputProps {
   setHoveredSlot: (time: string | null) => void
 }
 
-const TimeSlot: FC<TimeSlotProps> = ({ dateTime, numberSlots, onDateChange, slotTime, timeHovered, setHoveredSlot }) => {
+const TimeSlot: FC<TimeSlotProps> = ({
+  dateTime,
+  numberSlots,
+  onDateChange,
+  slotTime,
+  timeHovered,
+  setHoveredSlot,
+}) => {
   const { busyTimes } = useScheduling()
 
   const { morning, afternoon, night } = ScheduleUtils.dayHours()
@@ -30,7 +37,7 @@ const TimeSlot: FC<TimeSlotProps> = ({ dateTime, numberSlots, onDateChange, slot
       const index = times.findIndex((h) => +time === +h)
       return times.slice(index, index + numberSlots)
     },
-    [afternoon, morning, night],
+    [afternoon, morning, night]
   )
 
   const hoveredInterval = getPeriod(timeHovered, numberSlots)

@@ -1,14 +1,14 @@
-import { StyleSheet, Text, Pressable, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, Pressable, View } from 'react-native'
+import React from 'react'
 
 export interface StepsProps {
-  children: any;
-  labels: string[];
-  currentStep: number;
-  setCurrentStep(value: number): void;
-  nextStepAllowed: boolean;
-  onNextStepAllowedChange(valor: boolean): void;
-  finish(): void;
+  children: any
+  labels: string[]
+  currentStep: number
+  setCurrentStep(value: number): void
+  nextStepAllowed: boolean
+  onNextStepAllowedChange(valor: boolean): void
+  finish(): void
 }
 
 export default function Steps({
@@ -21,13 +21,13 @@ export default function Steps({
   setCurrentStep,
 }: StepsProps) {
   function goToPreviousStep() {
-    setCurrentStep(currentStep - 1);
-    onNextStepAllowedChange(true);
+    setCurrentStep(currentStep - 1)
+    onNextStepAllowedChange(true)
   }
 
   function goToNextStep() {
-    setCurrentStep(currentStep + 1);
-    onNextStepAllowedChange(false);
+    setCurrentStep(currentStep + 1)
+    onNextStepAllowedChange(false)
   }
 
   function renderSteps() {
@@ -38,7 +38,7 @@ export default function Steps({
             <View
               style={{
                 ...styles.stepNumber,
-                backgroundColor: i <= currentStep ? "#e4e4e7" : "#71717a",
+                backgroundColor: i <= currentStep ? '#e4e4e7' : '#71717a',
               }}
             >
               <Text>{i + 1}</Text>
@@ -46,7 +46,7 @@ export default function Steps({
             <Text
               style={{
                 ...styles.stepText,
-                color: i <= currentStep ? "white" : "#3f3f46",
+                color: i <= currentStep ? 'white' : '#3f3f46',
               }}
             >
               {label}
@@ -54,7 +54,7 @@ export default function Steps({
           </View>
         ))}
       </View>
-    );
+    )
   }
 
   function renderButton(text: string, enable: boolean, onPress: () => void) {
@@ -70,14 +70,14 @@ export default function Steps({
           <View
             style={{
               ...styles.button,
-              backgroundColor: enable ? "#27272a" : "#18181b",
+              backgroundColor: enable ? '#27272a' : '#18181b',
             }}
           >
             <Text style={styles.buttonText}>{text}</Text>
           </View>
         </Pressable>
       </View>
-    );
+    )
   }
 
   return (
@@ -86,61 +86,57 @@ export default function Steps({
       <View>{children?.[currentStep]}</View>
       <View
         style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
         }}
       >
-        {renderButton("Previous", currentStep === 0, goToPreviousStep)}
-        {renderButton(
-          "Next",
-          nextStepAllowed,
-          currentStep === labels.length - 1 ? finish : goToNextStep
-        )}
+        {renderButton('Previous', currentStep === 0, goToPreviousStep)}
+        {renderButton('Next', nextStepAllowed, currentStep === labels.length - 1 ? finish : goToNextStep)}
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   stepContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 20,
   },
   stepNumber: {
     borderRadius: 999,
     width: 20,
     height: 20,
-    color: "black",
-    justifyContent: "center",
-    alignItems: "center",
+    color: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   stepText: {
     fontSize: 18,
   },
   step: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 10,
   },
   buttonContainer: {
     marginTop: 10,
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingHorizontal: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 25,
     borderRadius: 5,
   },
   buttonText: {
     fontSize: 16,
-    color: "#fff",
-    fontWeight: "700",
+    color: '#fff',
+    fontWeight: '700',
   },
-});
+})

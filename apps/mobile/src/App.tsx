@@ -1,13 +1,13 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { UserProvider } from "./data/contexts/UserContext";
-import { SchedulingProvider } from "./data/contexts/SchedulingContext";
-import { NavigationContainer } from "@react-navigation/native";
-import Register from "./screens/Register";
-import Main from "./screens/Main";
-import Summary from "./screens/Summary";
-import React from "react";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { UserProvider } from './data/contexts/UserContext'
+import { SchedulingProvider } from './data/contexts/SchedulingContext'
+import { NavigationContainer } from '@react-navigation/native'
+import Register from './screens/Register'
+import Main from './screens/Main'
+import Summary from './screens/Summary'
+import React from 'react'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
@@ -40,5 +40,5 @@ export default function App() {
         </NavigationContainer>
       </SchedulingProvider>
     </UserProvider>
-  );
+  )
 }

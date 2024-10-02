@@ -1,2 +1,2 @@
-import Service from "./Service";
-export type { Service };
+import Service from './Service'
+export type { Service }

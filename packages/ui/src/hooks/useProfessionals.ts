@@ -1,7 +1,7 @@
-import { professionals } from "@barbers-blade/core";
+import { professionals } from '@barbers-blade/core'
 
 export default function useProfessionals() {
   return {
     professionals,
-  };
+  }
 }
