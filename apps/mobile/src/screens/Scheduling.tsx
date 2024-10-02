@@ -5,9 +5,14 @@ import ServicesInput from '../components/scheduling/ServicesInput'
 import ProfessionalInput from '../components/scheduling/ProfessionalInput'
 import Steps from '../components/scheduling/Steps'
 import DateInput from '../components/scheduling/DateInput'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type Props = {
+  navigation: NativeStackNavigationProp<{ Summary: undefined }, 'Summary'>;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Scheduling({ navigation }: { navigation: any }) {
+export default function Scheduling({ navigation }: Props) {
   const [nextStepAllowed, setNextStepAllowed] = useState<boolean>(false)
   const [currentStep, setCurrentStep] = useState(0)
 

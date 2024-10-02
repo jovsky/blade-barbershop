@@ -4,10 +4,15 @@ import Home from "./Home";
 import Scheduling from "./Scheduling";
 import User from "./User";
 import Icon from "../components/shared/Icon";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type Props = {
+  navigation: NativeStackNavigationProp<{ Main: undefined }, 'Main'>;
+};
 
 const Tab = createBottomTabNavigator();
 
-export default function Main({ navigation }: any) {
+export default function Main({ navigation }: Props) {
   function tab(name: string, component: any, label: string, icon: string) {
     return (
       <Tab.Screen

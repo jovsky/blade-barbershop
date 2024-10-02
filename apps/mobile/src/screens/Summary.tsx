@@ -1,8 +1,13 @@
 import { StyleSheet, Text, Pressable, View } from "react-native";
 import { CurrencyUtils, DateUtils } from "@barbers-blade/core";
 import useScheduling from "../data/hooks/useScheduling";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export default function Summary({ navigation }: any) {
+type Props = {
+  navigation: NativeStackNavigationProp<{ Home: undefined }, 'Home'>;
+};
+
+export default function Summary({ navigation }: Props) {
   const {
     dateTime: date,
     professional,

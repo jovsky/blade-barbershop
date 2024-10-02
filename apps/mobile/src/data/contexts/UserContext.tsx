@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { User } from "@barbers-blade/core";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -12,7 +12,7 @@ export interface UserContextProps {
 
 const UserContext = createContext<UserContextProps>({} as any);
 
-export function UserProvider({ children }: any) {
+export function UserProvider({ children }: PropsWithChildren) {
   const { get, set } = useLocalStorage();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);

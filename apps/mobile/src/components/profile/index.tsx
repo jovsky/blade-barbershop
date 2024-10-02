@@ -2,8 +2,13 @@ import { PhoneUtils } from "@barbers-blade/core";
 import { StyleSheet, View, Image, Text, Pressable } from "react-native";
 import useUser from "@/src/data/hooks/useUser";
 import React from "react";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export default function Profile({ navigation }: any) {
+type Props = {
+  navigation: NativeStackNavigationProp<{ Register: undefined }, 'Register'>;
+};
+
+export default function Profile({ navigation }: Props) {
   const { user, signOut } = useUser();
 
   return (
