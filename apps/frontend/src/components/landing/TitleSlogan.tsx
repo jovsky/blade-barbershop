@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import MenuSuperior from '@/components/shared/TopMenu'
+import TopMenu from '@/components/shared/TopMenu'
 import useUser from '@/data/hooks/useUser'
 
 export default function TitleSlogan() {
@@ -16,8 +16,8 @@ export default function TitleSlogan() {
                     bg-black/80 md:bg-transparent md:bg-gradient-to-r from-black/30 via-black/90 to-black/30
                 "
       >
-        <MenuSuperior />
-        <div className="container flex-1 flex flex-col justify-center items-center gap-5 z-50">
+        <TopMenu />
+        <div className="container flex-1 flex flex-col justify-center items-center gap-5">
           <h1 className="flex flex-col items-center">
             <span className="text-gradient text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black pb-2 uppercase">
               Legendary
