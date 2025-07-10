@@ -43,7 +43,7 @@ export default class DateUtils {
   }
 
   static formatDateAndHour(date: Date): string {
-    return date.toLocaleDateString('pt-BR', {
+    return date.toLocaleDateString(LOCALE, {
       weekday: 'long',
       year: 'numeric',
       month: 'long',

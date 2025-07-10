@@ -7,10 +7,6 @@ export interface DayInputProps {
 
 export default function DayInput(props: DayInputProps) {
   function renderDay(date: Date) {
-    if (date.getDay() === 0) {
-      date.setDate(date.getDate() + 1)
-    }
-
     const isSelected = date.getDate() === props.dateTime.getDate()
     return (
       <div
@@ -45,7 +41,6 @@ export default function DayInput(props: DayInputProps) {
       <div className="flex gap-5 bg-zinc-950 rounded-lg overflow-hidden">
         {Array.from({ length: 7 })
           .map((_, i) => new Date(DateUtils.today().getTime() + 86400000 * i))
-          .filter((date) => date.getDay() !== 0)
           .map((date) => renderDay(date))}
       </div>
     </div>

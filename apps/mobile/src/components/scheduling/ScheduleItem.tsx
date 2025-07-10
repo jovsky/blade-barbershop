@@ -1,4 +1,4 @@
-import { LOCALE, Schedule } from '@barbers-blade/core'
+import { CurrencyUtils, LOCALE, Schedule } from '@barbers-blade/core'
 import { StyleSheet, Text, View } from 'react-native'
 
 interface ScheduleItemProps {
@@ -45,7 +45,7 @@ export default function ScheduleItem(props: ScheduleItemProps) {
         {props.schedule.date && formatTime(new Date(props.schedule.date))}
       </Text>
       <Text style={styles.services}>{renderServices()}</Text>
-      <Text style={styles.price}>{`R$ ${sumTotalServices()},00`}</Text>
+      <Text style={styles.price}>{CurrencyUtils.formatCurrency(sumTotalServices())}</Text>
     </View>
   )
 }

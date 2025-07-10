@@ -34,7 +34,7 @@ const TimeSlot: FC<TimeSlotProps> = ({
     (time: string | null, numberSlots: number) => {
       if (!time) return []
       const times = morning.includes(time) ? morning : afternoon.includes(time) ? afternoon : night
-      const index = times.findIndex((h) => +time === +h)
+      const index = times.findIndex((h) => time === h)
       return times.slice(index, index + numberSlots)
     },
     [afternoon, morning, night]

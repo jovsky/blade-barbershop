@@ -13,7 +13,7 @@ export default class UserSignUp {
     if (existingUser) throw new Error('User already exists')
 
     const encryptedPassword = await this.cripto.encrypt(user.password)
-    const novoUser: User = { ...user, password: encryptedPassword, isBarber: false }
-    await this.repo.save(novoUser)
+    const newUser: User = { ...user, password: encryptedPassword, isBarber: false }
+    await this.repo.save(newUser)
   }
 }

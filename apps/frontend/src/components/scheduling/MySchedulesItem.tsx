@@ -1,4 +1,4 @@
-import { Schedule, ScheduleUtils, DateUtils } from '@barbers-blade/core'
+import { Schedule, ScheduleUtils, DateUtils, CurrencyUtils } from '@barbers-blade/core'
 import { IconCalendar, IconTrash } from '@tabler/icons-react'
 
 export interface MySchedulesItemProps {
@@ -9,7 +9,7 @@ export interface MySchedulesItemProps {
 export default function MySchedulesItem(props: MySchedulesItemProps) {
   const { schedule } = props
 
-  schedule.user.isBarber
+  const cost = schedule.services.reduce((acc, service) => acc + service.price, 0)
 
   return (
     <div className="flex items-center gap-6 bg-zinc-800 rounded-md p-7">
@@ -20,7 +20,7 @@ export default function MySchedulesItem(props: MySchedulesItemProps) {
       </div>
       <div className="flex flex-col items-center">
         <span className="text-xl font-black">{ScheduleUtils.totalDuration(schedule.services)}</span>
-        <span className="text-zinc-400">R$ {schedule.services.reduce((acc, service) => acc + service.price, 0)}</span>
+        <span className="text-zinc-400">{CurrencyUtils.formatCurrency(cost)}</span>
       </div>
       <div>
         <button className="button bg-red-500" onClick={() => props.delete(schedule.id)}>

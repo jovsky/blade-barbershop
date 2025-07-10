@@ -8,11 +8,7 @@ export class SchedulingController {
   constructor(private readonly service: SchedulingService) {}
 
   @Post()
-  create(
-    @Body() scheduling: Schedule,
-    @LoggedInUser() loggedInUser: User,
-    // @Request() req: { user?: string } /** ExpressRequest from express */
-  ) {
+  create(@Body() scheduling: Schedule, @LoggedInUser() loggedInUser: User) {
     if (scheduling.user.id !== loggedInUser.id) {
       throw new HttpException('Unauthorized action, you can only create schedules for yourself', 401)
     }
