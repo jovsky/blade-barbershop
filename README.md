@@ -78,7 +78,7 @@ This is a **monorepo** built with **Turborepo** featuring:
 
 ```bash
 git clone <repository-url>
-cd barbers-blade
+cd blade-barbershop
 yarn install
 ```
 
@@ -119,7 +119,7 @@ docker compose up --build -d
 Generate Prisma client based on schema:
 
 ```bash
-yarn prisma generate deploy
+yarn prisma generate
 ```
 
 Apply prisma migrations to the empty database, it will create the tables:
