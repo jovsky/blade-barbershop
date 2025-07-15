@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import TopMenu from '@/components/shared/TopMenu'
 import useUser from '@/data/hooks/useUser'
+import Logo from '../shared/Logo'
 
 export default function TitleSlogan() {
   const { user } = useUser()
@@ -18,7 +19,10 @@ export default function TitleSlogan() {
       >
         <TopMenu />
         <div className="container flex-1 flex flex-col justify-center items-center gap-5">
-          <h1 className="flex flex-col items-center">
+          <div className="flex items-center gap-2 mt-10">
+            <Logo size="lg" />
+          </div>
+          <h1 className="flex flex-col items-center mt-24">
             <span className="text-gradient text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black pb-2 uppercase">
               Legendary
             </span>
