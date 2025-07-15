@@ -1,4 +1,4 @@
-# 💈 Barbers Blade
+# 💈 The Barbers Blade
 
 A modern, full-stack barbershop management system built with cutting-edge technologies. This application provides a comprehensive solution for barbershop owners and customers to manage appointments, services, and professional profiles.
 
@@ -176,6 +176,15 @@ yarn dev
 cd apps/mobile
 yarn dev
 ```
+
+## 👤 Accessing the Application
+
+After starting the development servers, open your browser and navigate to the local frontend address: [http://localhost:3000](http://localhost:3000).
+
+- To create a new client account, visit [http://localhost:3000/login](http://localhost:3000/login) and use the registration option.
+- To log in as a barber for testing, use the following credentials:
+  - **Email:** `jhonny@barbersblade.app`
+  - **Password:** `#Senha123`
 
 ## 🏁 Building for Production
 
