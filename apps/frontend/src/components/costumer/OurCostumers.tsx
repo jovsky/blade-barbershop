@@ -20,9 +20,9 @@ export default function OurCostumers() {
   return (
     <div className="container flex flex-col items-center gap-16">
       <Title
-        tag="Clientes"
-        primary="Quem Manda Aqui"
-        secondary="Nossos clientes são os chefes! Aqui, eles mandam, desmandam e ainda saem com estilo de rockstar!"
+        tag="Customers"
+        primary="Who's the Boss Here"
+        secondary="Our customers are the bosses! Here, they call the shots, change their minds, and still leave with rockstar style!"
       />
       <div className="h-[900px] w-full">
         <LayoutGrid cards={cards} />
