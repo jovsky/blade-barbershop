@@ -2,6 +2,8 @@
 
 A modern, full-stack barbershop management system built with cutting-edge technologies. This application provides a comprehensive solution for barbershop owners and customers to manage appointments, services, and professional profiles.
 
+Screenshots on the bottom of this readme.
+
 ## 🚀 Features
 
 - **User Authentication**: Secure JWT-based authentication system
@@ -391,6 +393,14 @@ yarn web
 - Inspired by the need for efficient barbershop management
 - Thanks to the open-source community for amazing tools and libraries
 
----
+## Screenshots
+
+<img width="1333" height="711" alt="home" src="https://github.com/user-attachments/assets/51cb1588-958c-4732-8643-98f3ab663681" />
+<img width="1346" height="723" alt="signup" src="https://github.com/user-attachments/assets/5a80fb7b-de30-4a68-ad08-a13ae9e6fbca" />
+<img width="1330" height="707" alt="barbers" src="https://github.com/user-attachments/assets/92e9ca78-920d-409a-afbe-14bc217f2227" />
+<img width="1335" height="713" alt="schedule-1" src="https://github.com/user-attachments/assets/67da68f9-3501-4ee3-842f-eafd9882bd44" />
+<img width="1329" height="710" alt="shcedule-2" src="https://github.com/user-attachments/assets/628a7354-93b7-413b-b7f5-625a83da1ce6" />
+<img width="1327" height="713" alt="my-sched" src="https://github.com/user-attachments/assets/2d43ef89-85ac-4048-9127-05040ccf7151" />
+
 
 **Made with ❤️ for the barbershop community**
